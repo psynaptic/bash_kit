@@ -8,8 +8,8 @@
 
 mode=$1
 database=$2
-db_user=root
-db_pass=17736491
+db_user=$DB_USER
+db_pass=$DB_PASS
 destination=`pwd`
 
 # first we check to see if mysql is not running

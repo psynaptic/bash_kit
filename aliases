@@ -2,7 +2,7 @@
 # shortcuts
 alias r="source $BASH_PROFILE"
 alias p="vim $BASH_PROFILE"
-alias c="clear"
+#alias c="clear"
 alias h="history"
 alias ip="curl http://www.whatismyip.com/automation/n09230945.asp"
 

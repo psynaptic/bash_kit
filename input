@@ -6,4 +6,4 @@ set completion-ignore-case on
 set mark-symlinked-directories on
 
 # Set tab to cycle through commands rather than show options
-"\t": menu-complete
+# "\t": menu-complete

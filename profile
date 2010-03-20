@@ -10,8 +10,8 @@ if [ -f $BASH_KIT_DIR/aliases ]; then
 fi
 
 # Import custom alias definitions
-if [ -f $BASH_KIT_DIR/aliases ]; then
-  . $BASH_KIT_DIR/aliases_custom
+if [ -f $BASH_KIT_DIR/.aliases_custom ]; then
+  $HOME/.aliases_custom
 fi
 
 # Import function definitions

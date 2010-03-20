@@ -9,8 +9,8 @@ set mark-symlinked-directories on
 "\t": menu-complete
 
 # Make bash autocomplete with up arrow
-bind '"\e[A":history-search-backward'
-bind '"\e[B":history-search-forward'
+#bind '"\e[A":history-search-backward'
+#bind '"\e[B":history-search-forward'
 
 # Make cd try only directories
 complete -d cd

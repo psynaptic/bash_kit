@@ -43,4 +43,4 @@ alias mv='mv -i'
 # included scripts
 alias sql="$BASH_KIT_DIR/bin/sql.sh"
 alias cvs-release-notes="$BASH_KIT_DIR/bin/cvs-release-notes.php"
-alias cvsco="$BASH_KIT_DIR/bin/cvsco.sh"
+alias cvsco="$BASH_KIT_DIR/bin/cvsco.php"

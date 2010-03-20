@@ -1,5 +1,5 @@
-export BASH_KIT_DIR="~/.bash_kit"
-export BASH_PROFILE="~/.profile"
+export BASH_KIT_DIR="$HOME/.bash_kit"
+export BASH_PROFILE="$HOME/.profile"
 export INPUTRC=$BASH_KIT_DIR/input
 export REPO_SERVER="git@109.74.198.203"
 export REPO_LOCATION=""
@@ -7,6 +7,11 @@ export REPO_LOCATION=""
 # Import alias definitions
 if [ -f $BASH_KIT_DIR/aliases ]; then
   . $BASH_KIT_DIR/aliases
+fi
+
+# Import custom alias definitions
+if [ -f $BASH_KIT_DIR/aliases ]; then
+  . $BASH_KIT_DIR/aliases_custom
 fi
 
 # Import function definitions

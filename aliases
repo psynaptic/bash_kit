@@ -8,11 +8,11 @@ alias ip="curl http://www.whatismyip.com/automation/n09230945.asp"
 
 # list
 alias l="ls"
-alias ll="ls -lhG"
-alias la="ls -aG"
-alias lla="ls -laG"
-alias lt="ls -ltG"
-alias ld="ls -hG */"
+alias ll="ls --color=auto -Flh"
+alias la="ls --color=auto -a"
+alias lla="ls --color=auto -la"
+alias lt="ls --color=auto -lt"
+alias ld="ls --color=auto -h */"
 alias lc="ls -1 | wc -l"
 
 # remap

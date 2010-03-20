@@ -1,0 +1,24 @@
+# Stuff you need to do for things to work properly
+
+1. Rename the cloned repo or create a symlink:
+
+ln -s /path/to/bash_kit ~/.bash_kit
+
+2. Create custom aliases file:
+
+touch ~/.aliases_custom
+
+2. Add the following to ~/.profile:
+
+if [ "$BASH" ]; then
+  if [ -f ~/.bash_kit/profile ]; then
+    . ~/.bash_kit/profile
+  fi
+fi
+
+export DB_USER="DATABASE_USERNAME"
+export DB_PASS="DATABASE_PASSWORD"
+
+3. Source profile:
+
+source ~/.bash_kit

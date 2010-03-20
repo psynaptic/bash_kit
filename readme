@@ -19,6 +19,7 @@ fi
 export DB_USER="DATABASE_USERNAME"
 export DB_PASS="DATABASE_PASSWORD"
 export CVS_USER="CVS_USER"
+export DRUSH_PATH="/path/to/drush/drush.php"
 
 3. Source profile:
 

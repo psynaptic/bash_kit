@@ -7,10 +7,3 @@ set mark-symlinked-directories on
 
 # Set tab to cycle through commands rather than show options
 "\t": menu-complete
-
-# Make bash autocomplete with up arrow
-#bind '"\e[A":history-search-backward'
-#bind '"\e[B":history-search-forward'
-
-# Make cd try only directories
-complete -d cd

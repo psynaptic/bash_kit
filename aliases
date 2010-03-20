@@ -29,6 +29,7 @@ alias ga='git add'
 alias gau='git add -u'
 
 # drush
+alias drush=$DRUSH_PATH
 alias cc='drush cc all'
 alias f='drush features'
 alias fu='drush features-update -y'

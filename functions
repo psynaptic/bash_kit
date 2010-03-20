@@ -50,3 +50,7 @@ function gitexport () {
   fi
   ssh $REPO_SERVER "touch repos/$project/git-daemon-export-ok"
 }
+
+function cvslogin () {
+  export CVSROOT=:pserver:$1@cvs.drupal.org:/cvs/drupal-contrib && cvs login;
+}

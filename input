@@ -1,12 +1,12 @@
 
 # Turn on case insensitivity for tab-completition
-#set completion-ignore-case on
+set completion-ignore-case on
 
 # Make symlinked dirs behave as normal dirs for tab completion
-#set mark-symlinked-directories on
+set mark-symlinked-directories on
 
 # Set tab to cycle through commands rather than show options
-#"\t": menu-complete
+"\t": menu-complete
 
 # Make bash autocomplete with up arrow
 #bind '"\e[A":history-search-backward'

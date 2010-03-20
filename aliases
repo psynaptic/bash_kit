@@ -1,0 +1,46 @@
+
+# shortcuts
+alias r="source $BASH_PROFILE"
+alias p="vim $BASH_PROFILE"
+alias c="clear"
+alias h="history"
+alias ip="curl http://www.whatismyip.com/automation/n09230945.asp"
+
+# list
+alias l="ls"
+alias ll="ls -lhG"
+alias la="ls -aG"
+alias lla="ls -laG"
+alias lt="ls -ltG"
+alias ld="ls -hG */"
+alias lc="ls -1 | wc -l"
+
+# remap
+alias grep="grep --color -n"
+alias df="df -h"
+
+# git
+alias st='git status'
+alias gc='git commit -m'
+alias gpom='git push origin master'
+alias pull='git pull'
+alias dif='git diff'
+alias ga='git add'
+alias gau='git add -u'
+
+# drush
+alias cc='drush cc all'
+alias f='drush features'
+alias fu='drush features-update -y'
+alias fr='drush features-revert -y'
+
+# safety net
+alias rm='rm -i'
+alias rr="rm -ri"
+alias cp='cp -i'
+alias mv='mv -i'
+
+# included scripts
+alias sql="$BASH_KIT_DIR/sql.sh"
+alias cvs-release-notes="$BASH_KIT_DIR/cvs-release-notes.php"
+alias cvsco="$BASH_KIT_DIR/cvsco.sh"

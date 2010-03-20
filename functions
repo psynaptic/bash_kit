@@ -1,0 +1,52 @@
+
+##
+# Function to more easy add alias definitions.
+#
+# Usage:
+#   add <alias name> <command to run>
+#
+function add () {
+	local command=$1
+	shift 1
+	alias="alias $command='$@'"
+	read -p "Add alias: $alias?"
+	printf "$alias\n" >> $BASH_KIT_DIR/aliases
+	if [[ $# ]]; then
+		echo "Alias added"
+		source $BASH_KIT_DIR/aliases
+	  else
+	  echo "Failed to add alias"
+	fi
+}
+
+##
+# Set up a git repo using the contents of the pwd.
+#
+# Usage:
+#   add <alias name> <command to run>
+#
+function gitsetup () {
+  # if an argument is not given use the directory name
+  if [[ -n $1 ]]; then
+    project="$1"
+  else
+    project=`basename "$PWD"`
+  fi
+  location="${REPO_LOCATION}${project}"
+  git init
+  git add .
+  git commit -m "Initial commit of $project."
+  ssh $REPO_SERVER "mkdir $location && cd $location && git init --bare"
+  git remote add origin $REPO_SERVER:$location
+  git push origin master
+}
+
+function gitexport () {
+  # if an argument is not given use the directory name
+  if [[ -n $1 ]]; then
+    project="$1"
+  else
+    project=`basename "$PWD"`
+  fi
+  ssh $REPO_SERVER "touch repos/$project/git-daemon-export-ok"
+}

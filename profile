@@ -3,6 +3,8 @@ export BASH_PROFILE="$HOME/.profile"
 export INPUTRC=$BASH_KIT_DIR/input
 export REPO_SERVER="git@109.74.198.203"
 export REPO_LOCATION=""
+export CVSROOT=:pserver:$CVS_USER@cvs.drupal.org:/cvs/drupal-contrib
+export CVS_RSH="ssh"
 
 # Import alias definitions
 if [ -f $BASH_KIT_DIR/aliases ]; then
@@ -28,3 +30,5 @@ bind '"\e[B":history-search-forward'
 
 # Make cd try only directories
 complete -d cd
+
+

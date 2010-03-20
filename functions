@@ -10,10 +10,10 @@ function add () {
 	shift 1
 	alias="alias $command='$@'"
 	read -p "Add alias: $alias?"
-	printf "$alias\n" >> $BASH_KIT_DIR/aliases
+	printf "$alias\n" >> $HOME/.aliases_custom
 	if [[ $# ]]; then
 		echo "Alias added"
-		source $BASH_KIT_DIR/aliases
+		source $HOME/.aliases_custom
 	  else
 	  echo "Failed to add alias"
 	fi

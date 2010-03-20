@@ -13,4 +13,4 @@ set mark-symlinked-directories on
 #bind '"\e[B":history-search-forward'
 
 # Make cd try only directories
-#complete -d cd
+complete -d cd

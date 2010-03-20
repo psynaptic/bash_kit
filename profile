@@ -21,3 +21,10 @@ fi
 
 # Prompt to $host: /$pwd> in purple
 PS1='\[\e[0;35m\]\h: ${PWD}\[\e[m\]\[\e[1;35m\]> \[\e[m\]\[\e '
+
+# Make bash autocomplete with up arrow
+bind '"\e[A":history-search-backward'
+bind '"\e[B":history-search-forward'
+
+# Make cd try only directories
+complete -d cd

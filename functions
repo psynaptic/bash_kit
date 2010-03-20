@@ -6,11 +6,6 @@
 #   add <alias name> <command to run>
 #
 function add () {
-  if [[ -n $1 ]]; then
-    echo "Usage: add <alias name> <command to run>"
-    exit
-  fi
-
 	local command=$1
 	shift 1
 	alias="alias $command='$@'"

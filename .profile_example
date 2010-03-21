@@ -1,0 +1,24 @@
+export BASH_PROFILE="$HOME/.profile"
+export BASH_KIT_DIR="$HOME/.bash_kit"
+export BASH_KIT_ALIASES="$HOME/.bash_aliases"
+export REPO_SERVER="git@example.com"
+export REPO_LOCATION="/home/git/repositories/"
+export LS_OPTIONS="--color=auto"
+export DB_USER="username"
+export DB_PASS="password"
+export CVS_USER="username"
+export DRUSH_PATH="/path/to/drush/drush.php"
+
+if [ "$BASH" ]; then
+  if [ -f ~/.bashrc ]; then
+    . ~/.bashrc
+  fi
+fi
+
+if [ "$BASH" ]; then
+  if [ -f ~/.bash_kit/profile ]; then
+    . ~/.bash_kit/profile
+  fi
+fi
+
+mesg n

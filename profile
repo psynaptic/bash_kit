@@ -9,7 +9,7 @@ fi
 
 # Import custom alias definitions
 if [ -f $HOME/.bash_aliases ]; then
-  $HOME/.bash_aliases
+  . $HOME/.bash_aliases
 fi
 
 # Import function definitions

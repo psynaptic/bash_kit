@@ -1,8 +1,4 @@
-export BASH_KIT_DIR="$HOME/.bash_kit"
-export BASH_PROFILE="$HOME/.profile"
 export INPUTRC=$BASH_KIT_DIR/input
-export REPO_SERVER="git@109.74.198.203"
-export REPO_LOCATION=""
 export CVSROOT=":pserver:$CVS_USER@cvs.drupal.org:/cvs/drupal-contrib"
 export CVS_RSH="ssh"
 
@@ -12,8 +8,8 @@ if [ -f $BASH_KIT_DIR/aliases ]; then
 fi
 
 # Import custom alias definitions
-if [ -f $BASH_KIT_DIR/.aliases_custom ]; then
-  $HOME/.aliases_custom
+if [ -f $HOME/.bash_aliases ]; then
+  $HOME/.bash_aliases
 fi
 
 # Import function definitions

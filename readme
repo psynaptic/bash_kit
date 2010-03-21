@@ -2,25 +2,37 @@
 
 1. Rename the cloned repo or create a symlink:
 
-ln -s /path/to/bash_kit ~/.bash_kit
+mv ~/bash_kit ~/.bash_kit
+
+or
+
+ln -s ~/path/to/bash_kit ~/.bash_kit
+
 
 2. Create custom aliases file:
 
 touch ~/.aliases_custom
 
-2. Add the following to ~/.profile:
+
+3. Add the following to ~/.profile:
+
+export BASH_PROFILE="$HOME/.profile"
+export BASH_KIT_DIR="$HOME/.bash_kit"
+export BASH_KIT_ALIASES="$HOME/.bash_aliases"
+export DB_USER="username"
+export DB_PASS="password"
+export CVS_USER="username"
+export DRUSH_PATH="/path/to/drush/drush.php"
+export REPO_SERVER="git@example.com"
+export REPO_LOCATION="/home/git/"
 
 if [ "$BASH" ]; then
-  if [ -f ~/.bash_kit/profile ]; then
-    . ~/.bash_kit/profile
+  if [ -f $BASH_KIT_DIR/profile ]; then
+    . $BASH_KIT_DIR/profile
   fi
 fi
 
-export DB_USER="DATABASE_USERNAME"
-export DB_PASS="DATABASE_PASSWORD"
-export CVS_USER="CVS_USER"
-export DRUSH_PATH="/path/to/drush/drush.php"
 
-3. Source profile:
+4. Source profile:
 
-source ~/.bash_kit
+source ~/.profile

@@ -112,7 +112,8 @@ drop)
 			echo "No database name given"
 			exit
 		else
-		  sql show|grep $database >/dev/null # check if the database exists
+		  # check if the database exists
+		  mysql -u$db_user -p$db_pass -e "show databases" | grep $database >/dev/null
     	if [ $? -eq 0 ]; then
 		  	mysqladmin -u$db_user -p$db_pass drop $database
 		  else

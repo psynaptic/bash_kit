@@ -10,10 +10,10 @@ function add () {
 	shift 1
 	alias="alias $command='$@'"
 	read -p "Add alias: $alias?"
-	printf "$alias\n" >> $HOME/.aliases_custom
+	printf "$alias\n" >> $BASH_KIT_ALIASES
 	if [[ $# ]]; then
 		echo "Alias added"
-		source $HOME/.aliases_custom
+		source $BASH_KIT_ALIASES
 	  else
 	  echo "Failed to add alias"
 	fi
@@ -23,34 +23,46 @@ function add () {
 # Set up a git repo using the contents of the pwd.
 #
 # Usage:
-#   add <alias name> <command to run>
+#   gitsetup <repo>
 #
 function gitsetup () {
   # if an argument is not given use the directory name
   if [[ -n $1 ]]; then
-    project="$1"
+    repo="$1"
   else
-    project=`basename "$PWD"`
+    repo=`basename "$PWD"`
   fi
-  location="${REPO_LOCATION}${project}"
+  location="$REPO_LOCATION/$repo"
   git init
   git add .
-  git commit -m "Initial commit of $project."
+  git commit -m "Initial commit of $repo."
   ssh $REPO_SERVER "mkdir $location && cd $location && git init --bare"
   git remote add origin $REPO_SERVER:$location
   git push origin master
 }
 
+##
+# Allow a repository to be readable by git-daemon.
+#
+# Usage:
+#   gitexport <repo>
+#
 function gitexport () {
   # if an argument is not given use the directory name
   if [[ -n $1 ]]; then
-    project="$1"
+    repo="$1"
   else
-    project=`basename "$PWD"`
+    repo=`basename "$PWD"`
   fi
-  ssh $REPO_SERVER "touch repos/$project/git-daemon-export-ok"
+  ssh $REPO_SERVER "touch $REPO_LOCATION/$repo/git-daemon-export-ok"
 }
 
+##
+# Quickly switch cvs logins.
+#
+# Usage:
+#   cvslogin <username>
+#
 function cvslogin () {
   export CVSROOT=:pserver:$1@cvs.drupal.org:/cvs/drupal-contrib && cvs login;
 }

@@ -22,7 +22,7 @@ if [ -f $BASH_KIT_DIR/functions ]; then
 fi
 
 # Prompt to $host: /$pwd> in purple
-PS1='\[\e[0;35m\]\h: ${PWD}\[\e[m\]\[\e[1;35m\]> \[\e[m\]\[\e '
+PS1='\[\e[0;35m\]\u@\h: ${PWD}\[\e[m\]\[\e[1;35m\]> \[\e[m\]\[\e '
 
 # Make bash autocomplete with up arrow
 bind '"\e[A":history-search-backward'

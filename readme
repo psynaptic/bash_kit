@@ -20,6 +20,7 @@ export CVS_USER="username"
 export DRUSH_PATH="/path/to/drush/drush.php"
 export REPO_SERVER="git@example.com"
 export REPO_LOCATION="/home/git/"
+export LS_OPTIONS="--color=auto"
 
 if [ "$BASH" ]; then
   if [ -f $BASH_KIT_DIR/profile ]; then

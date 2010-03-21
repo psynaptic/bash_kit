@@ -8,7 +8,7 @@ alias ip="curl http://www.whatismyip.com/automation/n09230945.asp"
 
 # list
 alias l="ls"
-alias ll="ls --color=auto -Flh"
+alias ll="ls $LS_OPTIONS -Flh"
 alias la="ls --color=auto -a"
 alias lla="ls --color=auto -la"
 alias lt="ls --color=auto -lt"

@@ -9,12 +9,7 @@ or
 ln -s ~/path/to/bash_kit ~/.bash_kit
 
 
-2. Create custom aliases file:
-
-touch ~/.aliases_custom
-
-
-3. Add the following to ~/.profile:
+2. Add the following to ~/.profile:
 
 export BASH_PROFILE="$HOME/.profile"
 export BASH_KIT_DIR="$HOME/.bash_kit"
@@ -31,6 +26,11 @@ if [ "$BASH" ]; then
     . $BASH_KIT_DIR/profile
   fi
 fi
+
+
+3. Create custom aliases file if it doesn't already exist:
+
+touch $BASH_KIT_ALIASES
 
 
 4. Source profile:

@@ -32,11 +32,10 @@ function gitsetup () {
   else
     repo=`basename "$PWD"`
   fi
-  location="$REPO_LOCATION/$repo"
+  location="$REPO_LOCATION/$repo.git"
   git init
   git add .
-  git commit -m "Initial commit of $repo."
-  ssh $REPO_SERVER "mkdir $location && cd $location && git init --bare"
+  git commit -m "Initial commit."
   git remote add origin $REPO_SERVER:$location
   git push origin master
 }
@@ -54,7 +53,7 @@ function gitexport () {
   else
     repo=`basename "$PWD"`
   fi
-  ssh $REPO_SERVER "touch $REPO_LOCATION/$repo/git-daemon-export-ok"
+  ssh $REPO_SERVER "touch $REPO_LOCATION/$repo.git/git-daemon-export-ok"
 }
 
 ##

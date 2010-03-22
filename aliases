@@ -9,10 +9,10 @@ alias ip="curl http://www.whatismyip.com/automation/n09230945.asp"
 # list
 alias l="ls"
 alias ll="ls $LS_OPTIONS -Flh"
-alias la="ls --color=auto -a"
-alias lla="ls --color=auto -la"
-alias lt="ls --color=auto -lt"
-alias ld="ls --color=auto -h */"
+alias la="ls $LS_OPTIONS -a"
+alias lla="ls $LS_OPTIONS -la"
+alias lt="ls $LS_OPTIONS -lt"
+alias ld="ls $LS_OPTIONS -h */"
 alias lc="ls -1 | wc -l"
 
 # remap

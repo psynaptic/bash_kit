@@ -92,10 +92,10 @@ fi
 
 import)
 
-sql show|grep ^$database$ >/dev/null
-
+# Check if a database by the same name exists and if not, create it.
+$BASH_KIT_DIR/bin/sql.sh show|grep ^$database$ >/dev/null
 if [[ $? -eq 1 ]]; then
-  sql create $database
+  $BASH_KIT_DIR/bin/sql.sh create $database
 fi
 
 file=$3

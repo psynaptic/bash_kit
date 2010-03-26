@@ -18,12 +18,13 @@ if [ -f $BASH_KIT_DIR/functions ]; then
   . $BASH_KIT_DIR/functions
 fi
 
+# Import colour definitions
 if [ -f $BASH_KIT_DIR/colours ]; then
   . $BASH_KIT_DIR/colours
 fi
 
 # Prompt to $host: /$pwd> in purple
-PS1="\[$txtpur\]\u@\h: ${PWD}\[$txtrst\]\[$bldpur\]>\[$txtrst\] "
+PS1="\[$txtblu\]\u@\h: \w\[$txtrst\]\[$bldblu\]>\[$txtrst\] "
 
 # Make bash autocomplete with up arrow
 bind '"\e[A":history-search-backward'

@@ -1,3 +1,4 @@
+#!/bin/sh
 export INPUTRC=$BASH_KIT_DIR/input
 export CVSROOT=":pserver:$CVS_USER@cvs.drupal.org:/cvs/drupal-contrib"
 export CVS_RSH="ssh"
@@ -17,8 +18,12 @@ if [ -f $BASH_KIT_DIR/functions ]; then
   . $BASH_KIT_DIR/functions
 fi
 
+if [ -f $BASH_KIT_DIR/colours ]; then
+  . $BASH_KIT_DIR/colours
+fi
+
 # Prompt to $host: /$pwd> in purple
-PS1='\[\e[0;35m\]\u@\h: ${PWD}\[\e[m\]\[\e[1;35m\]> \[\e[m\]\[\e '
+PS1="\[$txtpur\]\u@\h: ${PWD}\[$txtrst\]\[$bldpur\]>\[$txtrst\] "
 
 # Make bash autocomplete with up arrow
 bind '"\e[A":history-search-backward'

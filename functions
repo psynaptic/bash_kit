@@ -31,7 +31,7 @@ function ci () {
     return;
   fi
   message="$1"
-  $VC commit -m $message;
+  $VC commit -m "$message";
   if [ $VC == 'git' ]; then
     git push origin master
   fi

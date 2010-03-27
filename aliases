@@ -4,7 +4,7 @@ alias r="source $BASH_PROFILE"
 alias p="vim $BASH_PROFILE"
 alias c="clear"
 alias h="history"
-alias ip="curl http://www.whatismyip.com/automation/n09230945.asp"
+alias ip="printf 'Your IP Address is: ';curl http://www.whatismyip.com/automation/n09230945.asp;printf '\n'"
 
 # list
 alias l="ls"
@@ -23,8 +23,8 @@ alias df="df -h"
 alias st='git status'
 alias gc='ci'
 alias gpom='git push origin master'
-alias pull='git pull'
-alias push='git push'
+alias pull='git pull origin master'
+alias push='git push origin master'
 alias dif='git diff'
 alias ga='git add'
 alias gau='git add -u'
@@ -32,6 +32,7 @@ alias gau='git add -u'
 # drush
 alias drush="php $DRUSH_PATH"
 alias cc='drush cc all'
+alias cct='drush cc theme'
 alias f='drush features'
 alias fu='drush features-update -y'
 alias fr='drush features-revert -y'

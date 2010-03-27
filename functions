@@ -81,5 +81,6 @@ function gitexport () {
 #   cvslogin <username>
 #
 function cvslogin () {
-  export CVSROOT=:pserver:$1@cvs.drupal.org:/cvs/drupal-contrib && cvs login;
+  export CVSROOT=":pserver:$1@cvs.drupal.org:/cvs/drupal-contrib"
+  cvs login
 }

@@ -23,8 +23,8 @@ if [ -f $BASH_KIT_DIR/colours ]; then
   . $BASH_KIT_DIR/colours
 fi
 
-# Prompt to $host: /$pwd> in purple
-PS1="\[$txtblu\]\u@\h: \w\[$txtrst\]\[$bldblu\]>\[$txtrst\] "
+# Prompt to $host: /$pwd> in cyan
+PS1="\[$text_blue\]\u@\h: \w\[$reset\]\[$bold_blue\]>\[$reset\] "
 
 # Make bash autocomplete with up arrow
 bind '"\e[A":history-search-backward'

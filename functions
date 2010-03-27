@@ -20,6 +20,24 @@ function add () {
 }
 
 ##
+# VCS agnostic commit with message.
+#
+# Usage:
+#   ci <message>
+#
+function ci () {
+  if [ $# == 0 ]; then
+    echo "Please supply a commit message.";
+    return;
+  fi
+  message="$1"
+  $VC commit -m "$message";
+  if [ $VC == 'git' ]; then
+    git push origin master
+  fi
+}
+
+##
 # Set up a git repo using the contents of the pwd.
 #
 # Usage:

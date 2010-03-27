@@ -2,6 +2,7 @@
 export INPUTRC=$BASH_KIT_DIR/input
 export CVSROOT=":pserver:$CVS_USER@cvs.drupal.org:/cvs/drupal-contrib"
 export CVS_RSH="ssh"
+export VC="git"
 
 # Import alias definitions
 if [ -f $BASH_KIT_DIR/aliases ]; then

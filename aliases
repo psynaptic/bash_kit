@@ -21,7 +21,7 @@ alias df="df -h"
 
 # git
 alias st='git status'
-alias gc='git commit -m'
+alias gc='ci'
 alias gpom='git push origin master'
 alias pull='git pull'
 alias push='git push'

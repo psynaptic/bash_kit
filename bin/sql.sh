@@ -10,6 +10,14 @@ mode=$1
 database=$2
 db_user=$DB_USER
 db_pass=$DB_PASS
+
+if [ "$db_pass" == "" ]
+  then
+    auth="-u $db_user"
+  else
+    auth="-u $db_user -p$db_pass"
+fi
+
 destination=`pwd`
 
 # first we check to see if mysql is not running
@@ -39,7 +47,7 @@ if [ $# -lt 2 ]
 	then
 	echo "No database name given"
 	else
-	mysqladmin -u$db_user -p$db_pass create $database
+	mysqladmin $auth create $database
 	check_error $? "Create $database"
 fi
 ;;
@@ -69,7 +77,7 @@ else # 2 or 3 arguments were passed...
 				then
 					sql=$destination/$database.sql
 					read -p "Dump $database database to $destination?" # prompt user
-					mysqldump --extended-insert=false -u$db_user -p$db_pass $database > $sql # dump database
+					mysqldump --extended-insert=false $auth $database > $sql # dump database
 					check_error $? "Dump $database to $sql"
 
 			elif [ $# -eq 3 ] # 3 arguments passed (dump table)
@@ -77,7 +85,7 @@ else # 2 or 3 arguments were passed...
 					table=$3
 					sql=$destination/$table.sql
 					read -p "Dump $table table to $destination?" # prompt user
-					mysqldump --extended-insert=false -u$db_user -p$db_pass $database $table > $sql # dump table
+					mysqldump --extended-insert=false $auth $database $table > $sql # dump table
 					check_error $? "Dump $table to $sql"
 					exit
 			fi
@@ -99,7 +107,7 @@ if [[ $? -eq 1 ]]; then
 fi
 
 file=$3
-mysql -u$db_user -p$db_pass $database < $file # import table
+mysql $auth $database < $file # import table
 
 check_error $? "Import $database"
 
@@ -113,9 +121,9 @@ drop)
 			exit
 		else
 		  # check if the database exists
-		  mysql -u$db_user -p$db_pass -e "show databases" | grep $database >/dev/null
+		  mysql $auth -e "show databases" | grep $database >/dev/null
     	if [ $? -eq 0 ]; then
-		  	mysqladmin -u$db_user -p$db_pass drop $database
+		  	mysqladmin $auth drop $database
 		  else
 		    echo "Database $database does not exist"
 		  fi
@@ -124,19 +132,19 @@ drop)
 
 
 show)
-	mysql -u$db_user -p$db_pass -e "show databases"
+	mysql $auth -e "show databases"
 ;;
 
 
 use)
-	mysql --auto-rehash -u$db_user -p$db_pass $database
+	mysql --auto-rehash $auth $database
 ;;
 
 
 *) 
 	if [ $# -eq 0 ]
 		then # if no parameters are passed default to login
-			mysql -u$db_user -p$db_pass
+			mysql $auth
 
 		else # if no option was recognised show usage information
 			echo "usage: sql command [database] [table]"

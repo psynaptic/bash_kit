@@ -10,7 +10,7 @@ mode=$1
 database=$2
 db_user=$DB_USER
 db_pass=$DB_PASS
-options=$MYSQL_DUMP_OPTIONS
+mysqldump_options=$MYSQLDUMP_OPTIONS
 
 if [ "$db_pass" == "" ]
   then
@@ -78,7 +78,7 @@ else # 2 or 3 arguments were passed...
         then
           sql=$destination/$database.sql
           read -p "Dump $database database to $destination?" # prompt user
-          mysqldump $dump_options $auth $database > $sql # dump database
+          mysqldump $mysqldump_options $auth $database > $sql # dump database
           check_error $? "Dump $database to $sql"
 
       elif [ $# -eq 3 ] # 3 arguments passed (dump table)
@@ -86,7 +86,7 @@ else # 2 or 3 arguments were passed...
           table=$3
           sql=$destination/$table.sql
           read -p "Dump $table table to $destination?" # prompt user
-          mysqldump $dump_options $auth $database $table > $sql # dump table
+          mysqldump $mysqldump_options $auth $database $table > $sql # dump table
           check_error $? "Dump $table to $sql"
           exit
       fi

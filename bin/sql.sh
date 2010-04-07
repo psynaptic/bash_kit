@@ -12,11 +12,16 @@ db_user=$DB_USER
 db_pass=$DB_PASS
 mysqldump_options=$MYSQLDUMP_OPTIONS
 
-if [ "$db_pass" == "" ]
+if [ "${db_pass}" == "" ]
   then
     mysql_auth="-u $db_user"
   else
     mysql_auth="-u $db_user -p$db_pass"
+fi
+
+if [ -z ${mysqldump_options} ]
+then
+  mysqldump_options="--extended-insert=false" 
 fi
 
 destination=`pwd`

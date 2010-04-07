@@ -28,9 +28,12 @@ if ! ps ax | grep -v grep | grep mysqld > /dev/null
     exit
 fi
 
+##
+# Checks for and reports on exit codes.
+#
+# $1 = exit code to parse
+# $2 = message
 function check_error {
-  # $1 = exit code to parse
-  # $2 = message
   if [ "${1}" -ne "0" ]
     then
       echo "${2} failed"
@@ -41,7 +44,47 @@ function check_error {
   fi
 }
 
+function sql_drop {
+  mysql $mysql_auth -e "DROP DATABASE IF EXISTS $1";
+}
+
+function sql_show {
+  mysql $mysql_auth -e "show databases";
+}
+
+function sql_check {
+  SCHEMA=`mysql $mysql_auth -e "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$1'"`;
+  if [ -z "$SCHEMA" ]; then
+    return 1;
+  else
+    return 0;
+  fi
+}
+
 case $mode in
+  
+  check)
+    sql_check $database;
+  ;;
+
+  drop)
+    if [ $# -lt 2 ]; then
+      echo "No database name given";
+      exit 2;
+    fi
+
+    sql_drop $database;
+  ;;
+
+  show)
+    sql_show;
+  ;;
+
+  use)
+    mysql $mysql_auth $database
+  ;;
+
+
 
 create)
 if [ $# -lt 2 ]
@@ -112,33 +155,6 @@ mysql $mysql_auth $database < $file # import table
 
 check_error $? "Import $database"
 
-;;
-
-
-drop)
-  if [ $# -lt 2 ]
-    then
-      echo "No database name given"
-      exit
-    else
-      # check if the database exists
-      mysql $mysql_auth -e "show databases" | grep $database >/dev/null
-      if [ $? -eq 0 ]; then
-        mysqladmin $mysql_auth drop $database
-      else
-        echo "Database $database does not exist"
-      fi
-  fi
-;;
-
-
-show)
-  mysql $mysql_auth -e "show databases"
-;;
-
-
-use)
-  mysql --auto-rehash $mysql_auth $database
 ;;
 
 

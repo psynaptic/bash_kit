@@ -54,7 +54,12 @@ function sql_drop {
 }
 
 function sql_show {
-  mysql $mysql_auth -e "show databases";
+  mysql $mysql_auth -e "SHOW DATABASES";
+}
+
+function sql_execute {
+  # We have to pass the database name, otherwise a command like "SELECT nid FROM node;" would fail.
+  mysql $mysql_auth -D $1 -e "$2"
 }
 
 function sql_check {
@@ -87,6 +92,11 @@ case $mode in
 
   use)
     mysql $mysql_auth $database
+  ;;
+  
+  execute)
+    # Argument must be in "" otherwise it is treated separately in sql_execute
+    sql_execute $database "$3"
   ;;
 
 
@@ -180,6 +190,7 @@ check_error $? "Import $database"
       echo "  sql import database table - import table to database"
       echo "  sql create database       - create database"
       echo "  sql drop database         - drop database"
+      echo "  sql execute [database] <SQL Command> - execute an sql query on the database"
   fi
 ;;
 

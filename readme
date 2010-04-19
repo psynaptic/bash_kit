@@ -37,8 +37,9 @@ export GREP_OPTIONS="--color -n"
 export EDITOR="mate -w"
 
 if [ "$BASH" ]; then
-  if [ -f $BASH_KIT_DIR/profile ]; then
-    . $BASH_KIT_DIR/profile
+  # Import bash_kit
+  if [ -f $HOME/.bash_kit/profile ]; then
+    . $HOME/.bash_kit/profile
   fi
 fi
 

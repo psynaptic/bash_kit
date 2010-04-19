@@ -20,6 +20,28 @@ function add () {
 }
 
 ##
+# Simple recursive grep helper. Searches for <regex pattern> within the
+# current dir.
+#
+# Usage:
+#   grepr <regex pattern>
+#
+function grepr () {
+  grep $1 -R .
+}
+
+##
+# Simple recursive contextual grep helper. Searches for <regex pattern> within
+# the current dir using a context value.
+#
+# Usage:
+#   grepr <regex pattern> <context>
+#
+function grepc () {
+  grep --context=$2 $1 -R .
+}
+
+##
 # VCS agnostic commit with message.
 #
 # Usage:
@@ -32,9 +54,33 @@ function ci () {
   fi
   message="$1"
   $VC commit -m "$message";
-  if [ $VC == 'git' ]; then
+  if [ $VC == 'git']; then
     git push origin master
   fi
+}
+
+##
+# VCS agnostic diff.
+#
+# Usage:
+#   dif
+#
+function dif () {
+  if [ $VC == 'cvs' ]; then
+    cvs diff -uP
+  else
+    $VC diff
+  fi
+}
+
+##
+# VCS agnostic status.
+#
+# Usage:
+#   st
+#
+function st () {
+  $VC status
 }
 
 ##

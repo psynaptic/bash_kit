@@ -25,7 +25,6 @@ alias gc='ci'
 alias gpom='git push origin master'
 alias pull='git pull origin master'
 alias push='git push origin master'
-alias dif='git diff'
 alias ga='git add'
 alias gau='git add -u'
 

@@ -1,0 +1,17 @@
+# Essential options.
+export DB_USER="username"
+export DB_PASS="password"
+export CVS_USER="username"
+export DRUSH_PATH="/path/to/drush/drush.php"
+export REPO_SERVER="git@example.com"
+
+# Optional options.
+#export LS_OPTIONS="-G"
+#export EDITOR="mate -w"
+
+if [ "$BASH" ]; then
+  # Import bash_kit
+  if [ -f $HOME/.bash_kit/profile ]; then
+    . $HOME/.bash_kit/profile
+  fi
+fi

@@ -1,7 +1,7 @@
 
 # shortcuts
 alias r="source $BASH_PROFILE"
-alias p="vim $BASH_PROFILE"
+alias p="$EDITOR $BASH_PROFILE"
 alias c="clear"
 alias h="history"
 alias ip="printf 'Your IP Address is: ';curl http://www.whatismyip.com/automation/n09230945.asp;printf '\n'"
@@ -16,7 +16,7 @@ alias ld="ls $LS_OPTIONS -h */"
 alias lc="ls -1 | wc -l"
 
 # remap
-alias grep="grep --color -n"
+alias grep="grep $GREP_OPTIONS"
 alias df="df -h"
 
 # git

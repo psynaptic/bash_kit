@@ -13,7 +13,7 @@ export BASH_KIT_DIR="$HOME/.bash_kit"
 export BASH_KIT_ALIASES="$HOME/.bash_aliases"
 export INPUTRC=$BASH_KIT_DIR/input
 
-# Local MySQL credentials.
+# mysqldump options.
 export MYSQLDUMP_OPTIONS="--extended-insert=false"
 
 # Remote repository details.

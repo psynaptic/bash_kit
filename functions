@@ -6,17 +6,21 @@
 #   add <alias name> <command to run>
 #
 function add () {
-	local command=$1
-	shift 1
-	alias="alias $command='$@'"
-	read -p "Add alias: $alias?"
-	printf "$alias\n" >> $BASH_KIT_ALIASES
-	if [[ $# ]]; then
-		echo "Alias added"
-		source $BASH_KIT_ALIASES
-	  else
-	  echo "Failed to add alias"
-	fi
+  if [ ! -f $BASH_KIT_ALIASES ]; then
+    touch $BASH_KIT_ALIASES
+  fi
+  
+  local command=$1
+  shift 1
+  alias="alias $command='$@'"
+  read -p "Add alias: $alias?"
+  printf "$alias\n" >> $BASH_KIT_ALIASES
+  if [[ $# ]]; then
+    echo "Alias added"
+    source $BASH_KIT_ALIASES
+    else
+    echo "Failed to add alias"
+  fi
 }
 
 ##

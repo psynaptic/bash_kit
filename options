@@ -1,24 +1,21 @@
 #!/bin/sh
 
-# drupal.org CVS details.
-export CVSROOT=":pserver:$CVS_USER@cvs.drupal.org:/cvs/drupal-contrib"
-export CVS_RSH="ssh"
+# Version control defaults.
+export VC="${VC:-git}"
+export CVSROOT="${CVSROOT:-:pserver:$CVS_USER@cvs.drupal.org:/cvs/drupal-contrib}"
+export CVS_RSH="${CVS_RSH:-ssh}"
+export REPO_LOCATION="${REPO_LOCATION:-/home/git/}"
 
-# Default version control software.
-export VC="git"
+# Shell defaults.
+export EDITOR="${EDITOR:-vim}"
+export INPUTRC="${INPUTRC:-$BASH_KIT_DIR/input}"
 
-# Bash kit options.
-export BASH_PROFILE="$HOME/.profile"
-export BASH_KIT_DIR="$HOME/.bash_kit"
-export BASH_KIT_ALIASES="$HOME/.bash_aliases"
-export INPUTRC=$BASH_KIT_DIR/input
+# Bash kit defaults.
+export BASH_PROFILE="${BASH_PROFILE:-$HOME/.profile}"
+export BASH_KIT_DIR="${BASH_KIT_DIR:-$HOME/.bash_kit}"
+export BASH_KIT_ALIASES="${BASH_KIT_ALIASES:-$HOME/.bash_aliases}"
 
-# mysqldump options.
-export MYSQLDUMP_OPTIONS="--extended-insert=false"
-
-# Remote repository details.
-export REPO_LOCATION="/home/git/"
-
-# Other utility options.
-export LS_OPTIONS="--color=auto"
-export GREP_OPTIONS="--color -n"
+# Utility default options.
+export LS_OPTIONS="${LS_OPTIONS:---color=auto}"
+export GREP_OPTIONS="${GREP_OPTIONS:---color -n}"
+export MYSQLDUMP_OPTIONS="${MYSQLDUMP_OPTIONS:---extended-insert=false}"

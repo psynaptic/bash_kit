@@ -20,7 +20,6 @@ alias grep="grep --color -n"
 alias df="df -h"
 
 # git
-alias st='git status'
 alias gc='ci'
 alias gpom='git push origin master'
 alias pull='git pull origin master'

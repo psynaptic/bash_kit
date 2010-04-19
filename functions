@@ -23,22 +23,24 @@ function add () {
 # Simple recursive grep helper. Searches for <regex pattern> within the
 # current dir.
 #
-# Usage:
-#   grepr <regex pattern>
-#
 function grepr () {
-  grep $1 -R .
+  if [ $# -lt 1 ]; then
+    echo "usage: grepr <regexp>";
+    return
+  fi
+  grep $1 $GREP_OPTIONS -R .
 }
 
 ##
 # Simple recursive contextual grep helper. Searches for <regex pattern> within
 # the current dir using a context value.
 #
-# Usage:
-#   grepr <regex pattern> <context>
-#
 function grepc () {
-  grep --context=$2 $1 -R .
+  if [ $# -lt 2 ]; then
+    echo "usage: grepc <regexp> <context>";
+    return
+  fi
+  grep --context=$2 $1 $GREP_OPTIONS -R .
 }
 
 ##

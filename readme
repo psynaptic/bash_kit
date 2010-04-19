@@ -22,6 +22,7 @@ export REPO_SERVER="git@example.com"
 export REPO_LOCATION="/home/git/"
 export LS_OPTIONS="--color=auto"
 export MYSQLDUMP_OPTIONS="--extended-insert=false"
+export GREP_OPTIONS="--color -n"
 
 if [ "$BASH" ]; then
   if [ -f $BASH_KIT_DIR/profile ]; then

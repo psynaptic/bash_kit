@@ -90,7 +90,7 @@ function ci () {
 # VCS agnostic diff.
 #
 # Usage:
-#   dif
+#   dif [args]
 #
 function dif () {
   if [ $VC == 'cvs' ]; then
@@ -104,7 +104,7 @@ function dif () {
 # VCS agnostic status.
 #
 # Usage:
-#   st
+#   st [args]
 #
 function st () {
   $VC status $*
@@ -135,7 +135,7 @@ function gitsetup () {
 # Allow a repository to be readable by git-daemon.
 #
 # Usage:
-#   gitexport <repo>
+#   gitexport [repo]
 #
 function gitexport () {
   # if an argument is not given use the directory name
@@ -150,10 +150,11 @@ function gitexport () {
 ##
 # Quickly switch cvs logins.
 #
-# Usage:
-#   cvslogin <username>
-#
 function cvslogin () {
+  if [ $# -lt 1 ]; then
+    echo "cvslogin <username>"
+    return
+  fi
   export CVSROOT=":pserver:$1@cvs.drupal.org:/cvs/drupal-contrib"
   cvs login
 }

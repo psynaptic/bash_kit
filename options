@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# drupal.org CVS details.
+export CVSROOT=":pserver:$CVS_USER@cvs.drupal.org:/cvs/drupal-contrib"
+export CVS_RSH="ssh"
+
+# Default version control software.
+export VC="git"
+
+# Bash kit options.
+export BASH_PROFILE="$HOME/.profile"
+export BASH_KIT_DIR="$HOME/.bash_kit"
+export BASH_KIT_ALIASES="$HOME/.bash_aliases"
+export INPUTRC=$BASH_KIT_DIR/input
+
+# Local MySQL credentials.
+export MYSQLDUMP_OPTIONS="--extended-insert=false"
+
+# Remote repository details.
+export REPO_LOCATION="/home/git/"
+
+# Other utility options.
+export LS_OPTIONS="--color=auto"
+export GREP_OPTIONS="--color -n"

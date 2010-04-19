@@ -25,22 +25,27 @@ function add () {
 #
 function grepr () {
   if [ $# -lt 1 ]; then
-    echo "usage: grepr <regexp>";
+    echo "usage: grepr <regexp> [context]"
     return
   fi
-  grep $1 $GREP_OPTIONS -R .
+  if [ $# == 1 ]; then
+    grep $1 $GREP_OPTIONS -R .
+    return
+  fi
+  if [ $# == 2 ]; then
+    grep --context=$2 $1 $GREP_OPTIONS -R .
+    return
+  fi
 }
 
 ##
-# Simple recursive contextual grep helper. Searches for <regex pattern> within
-# the current dir using a context value.
+# Version Control System switcher.
 #
-function grepc () {
-  if [ $# -lt 2 ]; then
-    echo "usage: grepc <regexp> <context>";
-    return
+function vc () {
+  if [ $# == 1 ]; then
+    export VC=$1
   fi
-  grep --context=$2 $1 $GREP_OPTIONS -R .
+  echo $VC
 }
 
 ##
@@ -50,13 +55,13 @@ function grepc () {
 #   ci <message>
 #
 function ci () {
-  if [ $# == 0 ]; then
-    echo "Please supply a commit message.";
-    return;
+  if [ $# -lt 1 ]; then
+    echo "usage: ci <message>"
+    return
   fi
   message="$1"
-  $VC commit -m "$message";
-  if [ $VC == 'git']; then
+  $VC commit -m "$message"
+  if [ "$VC" == 'git' ]; then
     git push origin master
   fi
 }

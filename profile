@@ -1,8 +1,9 @@
 #!/bin/sh
-export INPUTRC=$BASH_KIT_DIR/input
-export CVSROOT=":pserver:$CVS_USER@cvs.drupal.org:/cvs/drupal-contrib"
-export CVS_RSH="ssh"
-export VC="git"
+
+# Import default configuration options
+if [ -f $BASH_KIT_DIR/options ]; then
+  . $BASH_KIT_DIR/options
+fi
 
 # Import alias definitions
 if [ -f $BASH_KIT_DIR/aliases ]; then
@@ -23,6 +24,7 @@ fi
 if [ -f $BASH_KIT_DIR/colours ]; then
   . $BASH_KIT_DIR/colours
 fi
+
 
 # Prompt to $host: /$pwd> in cyan
 PS1="\[$text_blue\]\u@\h: \w\[$reset\]\[$bold_blue\]>\[$reset\] "

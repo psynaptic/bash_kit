@@ -53,6 +53,22 @@ function vc () {
 }
 
 ##
+# VCS agnostic add.
+#
+# Note: git add is completely different to bzr|cvs|svn add!
+#
+# Usage:
+#   add <file>
+#
+function add () {
+  if [ $# == 0 ]; then
+    echo "usage: add <file>"
+    return
+  fi
+  $VC add $1
+}
+
+##
 # VCS agnostic commit with message.
 #
 # Usage:

@@ -177,3 +177,11 @@ function cvslogin () {
   export CVSROOT=":pserver:$1@cvs.drupal.org:/cvs/drupal-contrib"
   cvs login
 }
+
+function cvsco () {
+  if [ $# -lt 1 ]; then
+    echo "cvsco <project>"
+    return
+  fi
+  php $DRUSH_PATH dl --package-handler=cvs $1
+}

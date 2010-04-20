@@ -24,8 +24,8 @@ alias gc='ci'
 alias gpom='git push origin master'
 alias pull='git pull origin master'
 alias push='git push origin master'
-alias ga='git add'
-alias gau='git add -u'
+alias ga='add'
+alias gau='add -u'
 
 # drush
 alias drush="php $DRUSH_PATH"

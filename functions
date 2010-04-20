@@ -1,5 +1,10 @@
 
 ##
+# Usage key:
+#   command <required> [optional]
+#
+
+##
 # Function to facilitate creation of new aliases.
 #
 function aa () {

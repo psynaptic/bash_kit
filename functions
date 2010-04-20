@@ -1,15 +1,15 @@
 
 ##
-# Function to more easy add alias definitions.
+# Function to facilitate creation of new aliases.
 #
-# Usage:
-#   add <alias name> <command to run>
-#
-function add () {
+function aa () {
   if [ ! -f $BASH_KIT_ALIASES ]; then
     touch $BASH_KIT_ALIASES
   fi
-  
+  if [ $# -lt 2 ]; then
+    echo "usage: add <alias> <command>"
+    return
+  fi 
   local command=$1
   shift 1
   alias="alias $command='$@'"
@@ -45,6 +45,9 @@ function grepr () {
 ##
 # Version Control System switcher.
 #
+# Usage:
+#   vc [vcs]
+#
 function vc () {
   if [ $# == 1 ]; then
     export VC=$1
@@ -57,9 +60,6 @@ function vc () {
 #
 # Note: git add is completely different to bzr|cvs|svn add!
 #
-# Usage:
-#   add <file>
-#
 function add () {
   if [ $# == 0 ]; then
     echo "usage: add <file>"
@@ -70,9 +70,6 @@ function add () {
 
 ##
 # VCS agnostic commit with message.
-#
-# Usage:
-#   ci <message>
 #
 function ci () {
   if [ $# -lt 1 ]; then

@@ -74,6 +74,23 @@ function add () {
 }
 
 ##
+# VCS agnostic update.
+#
+function up () {
+  case $VC in
+    cvs )
+      cvs update -dP $*
+      ;;
+    git )
+      git pull origin master
+      ;;
+    * )
+      $VC update $*
+      ;;
+  esac
+}
+
+##
 # VCS agnostic commit with message.
 #
 function ci () {

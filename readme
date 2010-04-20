@@ -20,6 +20,7 @@ ln -s ~/path/to/bash_kit ~/.bash_kit
 
 2. Add the following to ~/.profile:
 
+export BASH_KIT_DIR="$HOME/.bash_kit"
 export DB_USER="username"
 export DB_PASS="password"
 export CVS_USER="username"
@@ -28,7 +29,6 @@ export REPO_SERVER="git@example.com"
 
 # Optional overrides
 export BASH_PROFILE="$HOME/.profile"
-export BASH_KIT_DIR="$HOME/.bash_kit"
 export BASH_KIT_ALIASES="$HOME/.bash_aliases"
 export REPO_LOCATION="/home/git/"
 export LS_OPTIONS="--color=auto"

@@ -13,7 +13,6 @@ export INPUTRC="${INPUTRC:-$BASH_KIT_DIR/input}"
 
 # Bash kit defaults.
 export BASH_PROFILE="${BASH_PROFILE:-$HOME/.profile}"
-export BASH_KIT_DIR="${BASH_KIT_DIR:-$HOME/.bash_kit}"
 export BASH_KIT_ALIASES="${BASH_KIT_ALIASES:-$HOME/.bash_aliases}"
 
 # Utility default options.

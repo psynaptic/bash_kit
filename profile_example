@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # Essential options.
+export BASH_KIT_DIR="$HOME/.bash_kit"
 export DB_USER="username"
 export DB_PASS="password"
 export CVS_USER="username"

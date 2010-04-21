@@ -199,10 +199,10 @@ function vc_evaluate () {
     echo "This is an svn repo."
     return
   fi
-  if vc_is_cvs; then
-    echo "This is a cvs repo."
-    return
-  fi
+  # if vc_is_cvs; then
+  #   echo "This is a cvs repo."
+  #   return
+  # fi
 }
 
 function vc_is_git () {
@@ -217,6 +217,5 @@ function vc_is_svn () {
   svn info &>/dev/null
 }
 
-function vc_is_cvs () {
-  # @todo: figure out a *fast* way to determine if a dir is a cvs repo.
-}
+# @todo: figure out a *fast* way to determine if a dir is a cvs repo.
+#function vc_is_cvs () {}

@@ -5,8 +5,9 @@ export BASH_KIT_DIR="$HOME/bash_kit"
 export BASH_PROFILE="$HOME/.profile"
 export DRUSH_PATH="/path/to/drush/drush.php"
 
-#export BASH_KIT_ALIASES="${BASH_KIT_ALIASES:-$HOME/.bash_aliases}"
 #export EDITOR="${EDITOR:-vim}"
+#export BASH_KIT_ALIASES="${BASH_KIT_ALIASES:-$HOME/.bash_aliases}"
+#export INPUTRC="${INPUTRC:-$BASH_KIT_DIR/input}"
 
 # Database credentials.
 #export DB_USER="username"
@@ -20,9 +21,6 @@ export DRUSH_PATH="/path/to/drush/drush.php"
 #export CVS_DIFF_OPTIONS="${CVS_DIFF_OPTIONS:--up}"
 #export REPO_SERVER="git@example.com"
 #export REPO_LOCATION="${REPO_LOCATION:-/home/git/}"
-
-# Shell defaults.
-#export INPUTRC="${INPUTRC:-$BASH_KIT_DIR/input}"
 
 # Utility default options.
 #export EDITOR="mate -w"

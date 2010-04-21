@@ -1,49 +1,7 @@
-##
-# Bash Kit
-# A bash toolkit of common helpers.
-#
+Bash Kit
 
+1. Read through the profile_example file and copy the bits you need into your
+   main bash profile file. The exact variables and their values will depend on
+   your system.
 
-##
-# Setup Instructions
-#
-
-
-1. Rename the cloned repo or create a symlink:
-
-mv ~/bash_kit ~/.bash_kit
-
-or
-
-ln -s ~/path/to/bash_kit ~/.bash_kit
-
-
-2. Add the following to ~/.profile:
-
-export BASH_KIT_DIR="$HOME/.bash_kit"
-export DB_USER="username"
-export DB_PASS="password"
-export CVS_USER="username"
-export DRUSH_PATH="/path/to/drush/drush.php"
-export REPO_SERVER="git@example.com"
-
-# Optional overrides
-export BASH_PROFILE="$HOME/.profile"
-export BASH_KIT_ALIASES="$HOME/.bash_aliases"
-export REPO_LOCATION="/home/git/"
-export LS_OPTIONS="--color=auto"
-export MYSQLDUMP_OPTIONS="--extended-insert=false"
-export GREP_OPTIONS="--color -n"
-export EDITOR="mate -w"
-
-if [ "$BASH" ]; then
-  # Import bash_kit
-  if [ -f $HOME/.bash_kit/profile ]; then
-    . $HOME/.bash_kit/profile
-  fi
-fi
-
-
-3. Source profile:
-
-source ~/.profile
+2. Source your main profile. E.g. source ~/.profile

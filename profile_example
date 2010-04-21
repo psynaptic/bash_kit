@@ -1,20 +1,38 @@
 #!/bin/sh
 
-# Essential options.
-export BASH_KIT_DIR="$HOME/.bash_kit"
-export DB_USER="username"
-export DB_PASS="password"
-export CVS_USER="username"
+# Essential.
+export BASH_KIT_DIR="$HOME/bash_kit"
+export BASH_PROFILE="$HOME/.profile"
 export DRUSH_PATH="/path/to/drush/drush.php"
-export REPO_SERVER="git@example.com"
 
-# Optional options.
-#export LS_OPTIONS="-G"
+#export BASH_KIT_ALIASES="${BASH_KIT_ALIASES:-$HOME/.bash_aliases}"
+#export EDITOR="${EDITOR:-vim}"
+
+# Database credentials.
+#export DB_USER="username"
+#export DB_PASS="password"
+
+# Version control.
+#export VC="${VC:-git}"
+#export CVS_USER="username"
+#export CVSROOT="${CVSROOT:-:pserver:$CVS_USER@cvs.drupal.org:/cvs/drupal-contrib}"
+#export CVS_RSH="${CVS_RSH:-ssh}"
+#export CVS_DIFF_OPTIONS="${CVS_DIFF_OPTIONS:--up}"
+#export REPO_SERVER="git@example.com"
+#export REPO_LOCATION="${REPO_LOCATION:-/home/git/}"
+
+# Shell defaults.
+#export INPUTRC="${INPUTRC:-$BASH_KIT_DIR/input}"
+
+# Utility default options.
 #export EDITOR="mate -w"
+#export LS_OPTIONS="${LS_OPTIONS:---color=auto}"
+#export GREP_OPTIONS="${GREP_OPTIONS:---color -n}"
+#export MYSQLDUMP_OPTIONS="${MYSQLDUMP_OPTIONS:---extended-insert=false}"
 
 if [ "$BASH" ]; then
   # Import bash_kit
-  if [ -f $HOME/.bash_kit/profile ]; then
-    . $HOME/.bash_kit/profile
+  if [ -f $HOME/bash_kit/profile ]; then
+    . $HOME/bash_kit/profile
   fi
 fi

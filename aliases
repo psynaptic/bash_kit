@@ -2,8 +2,8 @@
 # shortcuts
 alias r="source $BASH_PROFILE"
 alias p="$EDITOR $BASH_PROFILE"
-alias c="clear"
-alias h="history"
+alias a="$EDITOR $BASH_KIT_ALIASES"
+alias bk="$EDITOR $BASH_KIT_DIR"
 alias ip="printf 'Your IP Address is: ';curl http://www.whatismyip.com/automation/n09230945.asp;printf '\n'"
 
 # list
@@ -18,6 +18,8 @@ alias lc="ls -1 | wc -l"
 # remap
 alias grep="grep $GREP_OPTIONS"
 alias df="df -h"
+alias c="clear"
+alias h="history"
 
 # git
 alias gc='ci'

@@ -183,7 +183,7 @@ function cvsco () {
     echo "cvsco <project>"
     return
   fi
-  php $DRUSH_PATH dl --package-handler=cvs $1
+  php $DRUSH_PATH dl --package-handler=cvs --cvscredentials=$CVS_USER $1
 }
 
 function vc_evaluate () {

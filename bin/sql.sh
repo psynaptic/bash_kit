@@ -6,6 +6,20 @@
 # - Move constant variables to the top
 # - Add options (flags) e.g. -f to force command without prompting user
 
+audio=0
+verbose=0
+while getopts "av" option; do
+  case $option in
+    a )
+      audio="1";
+      ;;
+    v )
+      verbose="1";
+      ;;
+  esac
+done
+shift $(($OPTIND - 1))
+
 mode=$1
 database=$2
 destination=`pwd`
@@ -28,13 +42,22 @@ fi
 # $1 = exit code to parse
 # $2 = message
 function check_error {
-  if [ "${1}" -ne "0" ]
-    then
+  if [ "${1}" -ne "0" ]; then
+    if [ $verbose -eq "1" ]; then
       echo "${2} failed"
-      exit
-    else
+    fi
+    if [ $audio -eq "1" ]; then
+      say -vVictoria "process failed"
+    fi
+    exit
+  else
+    if [ $verbose -eq "1" ]; then
       echo "${2} was sucessful"
-      exit
+    fi
+    if [ $audio -eq "1" ]; then
+      say -vVictoria "process complete"
+    fi
+    exit
   fi
 }
 
@@ -158,7 +181,6 @@ file=$3
 mysql $mysql_auth $database < $file # import table
 
 check_error $? "Import $database"
-
 ;;
 
 

@@ -8,23 +8,12 @@
 
 mode=$1
 database=$2
-db_user=$DB_USER
-db_pass=$DB_PASS
-mysqldump_options=$MYSQLDUMP_OPTIONS
-
-if [ "${db_pass}" == "" ]
-  then
-    mysql_auth="-u $db_user"
-  else
-    mysql_auth="-u $db_user -p$db_pass"
-fi
-
-if [ -z ${mysqldump_options} ]
-then
-  mysqldump_options="--extended-insert=false" 
-fi
-
 destination=`pwd`
+
+mysql_auth="-u $DB_USER"
+if [ -n "${DB_PASS}" ]; then
+  mysql_auth="$mysql_auth -p$DB_PASS"
+fi
 
 # first we check to see if mysql is not running
 if ! ps ax | grep -v grep | grep mysqld > /dev/null
@@ -136,7 +125,7 @@ else # 2 or 3 arguments were passed...
         then
           sql=$destination/$database.sql
           read -p "Dump $database database to $destination?" # prompt user
-          mysqldump $mysqldump_options $mysql_auth $database > $sql # dump database
+          mysqldump $MYSQLDUMP_OPTIONS $mysql_auth $database > $sql # dump database
           check_error $? "Dump $database to $sql"
 
       elif [ $# -eq 3 ] # 3 arguments passed (dump table)
@@ -144,7 +133,7 @@ else # 2 or 3 arguments were passed...
           table=$3
           sql=$destination/$table.sql
           read -p "Dump $table table to $destination?" # prompt user
-          mysqldump $mysqldump_options $mysql_auth $database $table > $sql # dump table
+          mysqldump $MYSQLDUMP_OPTIONS $mysql_auth $database $table > $sql # dump table
           check_error $? "Dump $table to $sql"
           exit
       fi
@@ -190,7 +179,7 @@ check_error $? "Import $database"
       echo "  sql import database table - import table to database"
       echo "  sql create database       - create database"
       echo "  sql drop database         - drop database"
-      echo "  sql execute [database] <SQL Command> - execute an sql query on the database"
+      echo "  sql execute <database> <command> - execute an sql query on the database"
   fi
 ;;
 

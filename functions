@@ -37,14 +37,12 @@ function grepr () {
     echo "usage: grepr <regexp> [context]"
     return
   fi
-  if [ $# == 1 ]; then
-    grep $1 $GREP_OPTIONS -R .
-    return
-  fi
+  local options=$GREP_OPTIONS
   if [ $# == 2 ]; then
-    grep --context=$2 $1 $GREP_OPTIONS -R .
-    return
+    echo "more than 2"
+    options="--context=$2 $GREP_OPTIONS"
   fi
+  grep $1 $options -R .
 }
 
 ##

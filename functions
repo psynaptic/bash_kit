@@ -38,11 +38,17 @@ function grepr () {
     return
   fi
   local options=$GREP_OPTIONS
+  local regex=$1
+
+  # Automatically escape spaces.
+  local search="${regex// /\W}"
+
+  # If 3 parameters are passed, add the context option.
   if [ $# == 2 ]; then
-    echo "more than 2"
     options="--context=$2 $GREP_OPTIONS"
   fi
-  grep $1 $options -R .
+
+  grep "$search" $options -R .
 }
 
 ##

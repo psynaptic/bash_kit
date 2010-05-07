@@ -9,7 +9,6 @@ export REPO_LOCATION="${REPO_LOCATION:-/home/git/}"
 
 # Shell defaults.
 export EDITOR="${EDITOR:-vim}"
-export INPUTRC="${INPUTRC:-$BASH_KIT_DIR/input}"
 
 # Bash kit defaults.
 export BASH_PROFILE="${BASH_PROFILE:-$HOME/.profile}"

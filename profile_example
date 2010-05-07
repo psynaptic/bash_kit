@@ -7,7 +7,6 @@ export DRUSH_PATH="/path/to/drush/drush.php"
 
 #export EDITOR="${EDITOR:-vim}"
 #export BASH_KIT_ALIASES="${BASH_KIT_ALIASES:-$HOME/.bash_aliases}"
-#export INPUTRC="${INPUTRC:-$BASH_KIT_DIR/input}"
 
 # Database credentials.
 #export DB_USER="username"

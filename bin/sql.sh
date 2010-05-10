@@ -47,17 +47,15 @@ function check_error {
       echo "${2} failed"
     fi
     if [ $audio -eq "1" ]; then
-      say -vVictoria "process failed"
+      say -vVictoria "${2} failed"
     fi
-    exit
   else
     if [ $verbose -eq "1" ]; then
-      echo "${2} was sucessful"
+      echo "${2} sucessful"
     fi
     if [ $audio -eq "1" ]; then
-      say -vVictoria "process complete"
+      say -vVictoria "${2} successful"
     fi
-    exit
   fi
 }
 
@@ -81,6 +79,11 @@ function sql_check {
   else
     return 0;
   fi
+}
+
+function sql_create {
+  mysqladmin $mysql_auth create $database
+  check_error $? "Create $database"
 }
 
 case $mode in
@@ -111,17 +114,9 @@ case $mode in
     sql_execute $database "$3"
   ;;
 
-
-
-create)
-if [ $# -lt 2 ]
-  then
-  echo "No database name given"
-  else
-  mysqladmin $mysql_auth create $database
-  check_error $? "Create $database"
-fi
-;;
+  create)
+    sql_create $database
+  ;;
 
 
 dump)
@@ -150,7 +145,7 @@ else # 2 or 3 arguments were passed...
           read -p "Dump $database database to $destination?" # prompt user
           mysqldump $MYSQLDUMP_OPTIONS $mysql_auth $database > $sql # dump database
           check_error $? "Dump $database to $sql"
-
+          exit
       elif [ $# -eq 3 ] # 3 arguments passed (dump table)
         then
           table=$3
@@ -171,16 +166,14 @@ fi
 
 import)
 
-# Check if a database by the same name exists and if not, create it.
-$BASH_KIT_DIR/bin/sql.sh show|grep ^$database$ >/dev/null
-if [[ $? -eq 1 ]]; then
-  $BASH_KIT_DIR/bin/sql.sh create $database
-fi
+sql_drop $database
+sql_create $database
 
 file=$3
-mysql $mysql_auth $database < $file # import table
+mysql $mysql_auth $database < $file
 
 check_error $? "Import $database"
+exit
 ;;
 
 
@@ -207,3 +200,11 @@ check_error $? "Import $database"
 
 
 esac
+
+
+# JUNK:
+# Check if a database by the same name exists and if not, create it.
+# $BASH_KIT_DIR/bin/sql.sh show|grep ^$database$ >/dev/null
+# if [[ $? -eq 1 ]]; then
+#   $BASH_KIT_DIR/bin/sql.sh create $database
+# fi

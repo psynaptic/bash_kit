@@ -60,20 +60,20 @@ function check_error {
 }
 
 function sql_drop {
-  mysql $mysql_auth -e "DROP DATABASE IF EXISTS $1";
+  $MYSQL $mysql_auth -e "DROP DATABASE IF EXISTS $1";
 }
 
 function sql_show {
-  mysql $mysql_auth -e "SHOW DATABASES";
+  $MYSQL $mysql_auth -e "SHOW DATABASES";
 }
 
 function sql_execute {
   # We have to pass the database name, otherwise a command like "SELECT nid FROM node;" would fail.
-  mysql $mysql_auth -D $1 -e "$2"
+  $MYSQL $mysql_auth -D $1 -e "$2"
 }
 
 function sql_check {
-  SCHEMA=`mysql $mysql_auth -e "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$1'"`;
+  SCHEMA=`$MYSQL $mysql_auth -e "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$1'"`;
   if [ -z "$SCHEMA" ]; then
     return 1;
   else
@@ -82,7 +82,7 @@ function sql_check {
 }
 
 function sql_create {
-  mysqladmin $mysql_auth create $database
+  $MYSQLADMIN $mysql_auth create $database
   check_error $? "Create $database"
 }
 
@@ -106,7 +106,7 @@ case $mode in
   ;;
 
   use)
-    mysql $mysql_auth $database
+    $MYSQL $mysql_auth $database
   ;;
   
   execute)
@@ -143,7 +143,7 @@ else # 2 or 3 arguments were passed...
         then
           sql=$destination/$database.sql
           read -p "Dump $database database to $destination?" # prompt user
-          mysqldump $MYSQLDUMP_OPTIONS $mysql_auth $database > $sql # dump database
+          $MYSQLDUMP $MYSQLDUMP_OPTIONS $mysql_auth $database > $sql # dump database
           check_error $? "Dump $database to $sql"
           exit
       elif [ $# -eq 3 ] # 3 arguments passed (dump table)
@@ -151,7 +151,7 @@ else # 2 or 3 arguments were passed...
           table=$3
           sql=$destination/$table.sql
           read -p "Dump $table table to $destination?" # prompt user
-          mysqldump $MYSQLDUMP_OPTIONS $mysql_auth $database $table > $sql # dump table
+          $MYSQLDUMP $MYSQLDUMP_OPTIONS $mysql_auth $database $table > $sql # dump table
           check_error $? "Dump $table to $sql"
           exit
       fi
@@ -170,7 +170,7 @@ sql_drop $database
 sql_create $database
 
 file=$3
-mysql $mysql_auth $database < $file
+$MYSQL $mysql_auth $database < $file
 
 check_error $? "Import $database"
 exit
@@ -180,7 +180,7 @@ exit
 *)
   if [ $# -eq 0 ]
     then # if no parameters are passed default to login
-      mysql $mysql_auth
+      $MYSQL $mysql_auth
 
     else # if no option was recognised show usage information
       echo "usage: sql command [database] [table]"

@@ -19,5 +19,10 @@ export LS_OPTIONS="${LS_OPTIONS:---color=auto}"
 export GREP_OPTIONS="${GREP_OPTIONS:---color -n}"
 export MYSQLDUMP_OPTIONS="${MYSQLDUMP_OPTIONS:---extended-insert=false}"
 
+# MySQL binaries
+export MYSQL="${MYSQL:mysql}"
+export MYSQLADMIN="${MYSQLADMIN:mysqladmin}"
+export MYSQLDUMP="${MYSQLDUMP:mysqldump}"
+
 # SSH credentials
 export SSH="${ROOT_DEV:-root@dev.fs}"

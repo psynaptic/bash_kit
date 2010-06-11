@@ -232,3 +232,14 @@ function vc_is_svn () {
 
 # @todo: figure out a *fast* way to determine if a dir is a cvs repo.
 #function vc_is_cvs () {}
+
+##
+# Add the post-receive hook into a project's repo.
+#
+function post-receive () {
+  if [ $# -lt 1 ]; then
+    echo "post-receive <project>"
+    return
+  fi
+  ssh $SSH "ln -s ${REPO_LOCATION}post-receive ${REPO_LOCATION}repositories/$1.git/hooks/"
+}

@@ -11,7 +11,7 @@ export REPO_LOCATION="${REPO_LOCATION:-/home/git/}"
 export EDITOR="${EDITOR:-vim}"
 
 # Bash kit defaults.
-export BASH_PROFILE="${BASH_PROFILE:-$HOME/.profile}"
+export BASH_PROFILE="${BASH_PROFILE:-$HOME/.bash_profile}"
 export BASH_KIT_ALIASES="${BASH_KIT_ALIASES:-$HOME/.bash_aliases}"
 
 # Utility default options.

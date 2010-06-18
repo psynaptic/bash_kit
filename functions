@@ -155,6 +155,14 @@ function gitsetup () {
   git push origin master
 }
 
+function gitmigrate () {
+  git remote rm origin
+  git remote add origin git@dev.fs:$1
+  read -p "Add $1 to gitosis."
+  ssh $SSH "ln -s /home/git/post-receive /home/git/repositories/$1.git/hooks/"
+  push
+}
+
 ##
 # Allow a repository to be readable by git-daemon.
 #

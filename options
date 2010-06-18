@@ -23,3 +23,6 @@ export MYSQLDUMP_OPTIONS="${MYSQLDUMP_OPTIONS:---extended-insert=false}"
 export MYSQL="${MYSQL:mysql}"
 export MYSQLADMIN="${MYSQLADMIN:mysqladmin}"
 export MYSQLDUMP="${MYSQLDUMP:mysqldump}"
+
+# SSH credentials
+export SSH="${ROOT_DEV:-root@dev.fs}"

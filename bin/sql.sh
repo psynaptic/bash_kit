@@ -170,7 +170,13 @@ sql_drop $database
 sql_create $database
 
 file=$3
-$MYSQL $mysql_auth $database < $file
+# If the file ends with .gz it is probably a gzipped dump.
+if [ ${file: -3} == ".gz" ]
+then
+  gunzip $file | $MYSQL $mysql_auth $database
+else
+  $MYSQL $mysql_auth $database < $file
+fi
 
 check_error $? "Import $database"
 exit

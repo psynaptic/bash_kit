@@ -11,7 +11,7 @@ export REPO_LOCATION="${REPO_LOCATION:-/home/git/}"
 export EDITOR="${EDITOR:-vim}"
 
 # Bash kit defaults.
-export BASH_PROFILE="${BASH_PROFILE:-$HOME/.profile}"
+export BASH_PROFILE="${BASH_PROFILE:-$HOME/.bash_profile}"
 export BASH_KIT_ALIASES="${BASH_KIT_ALIASES:-$HOME/.bash_aliases}"
 
 # Utility default options.
@@ -20,9 +20,9 @@ export GREP_OPTIONS="${GREP_OPTIONS:---color -n}"
 export MYSQLDUMP_OPTIONS="${MYSQLDUMP_OPTIONS:---extended-insert=false}"
 
 # MySQL binaries
-export MYSQL="${MYSQL:mysql}"
-export MYSQLADMIN="${MYSQLADMIN:mysqladmin}"
-export MYSQLDUMP="${MYSQLDUMP:mysqldump}"
+export MYSQL="${MYSQL:-mysql}"
+export MYSQLADMIN="${MYSQLADMIN:-mysqladmin}"
+export MYSQLDUMP="${MYSQLDUMP:-mysqldump}"
 
 # SSH credentials
 export SSH="${ROOT_DEV:-root@dev.fs}"

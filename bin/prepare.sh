@@ -9,7 +9,10 @@ cp sites/default/default.settings.php sites/default/settings.php
 chmod 666 sites/default/settings.php
 mkdir sites/default/files
 mkdir -p sites/all/modules/contrib
+mkdir -p sites/all/modules/custom
 mkdir -p sites/all/themes/contrib
+mkdir -p sites/all/themes/custom
+mkdir -p sites/all/libraries
 chmod 777 sites/default/files
 
 if [ $CORE == 7 ]

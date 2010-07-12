@@ -23,6 +23,7 @@ shift $(($OPTIND - 1))
 mode=$1
 database=$2
 destination=`pwd`
+date=`date +%d%m%Y%H%M%S`
 
 mysql_auth="-u $DB_USER"
 if [ -n "${DB_PASS}" ]; then
@@ -141,7 +142,7 @@ else # 2 or 3 arguments were passed...
       # filter mode of operation
       if [ $# -eq 2 ] # 2 arguments passed (dump database)
         then
-          sql=$destination/$database.sql
+          sql=$destination/$database-$date.sql
           read -p "Dump $database database to $destination?" # prompt user
           $MYSQLDUMP $MYSQLDUMP_OPTIONS $mysql_auth $database > $sql # dump database
           check_error $? "Dump $database to $sql"
@@ -149,7 +150,7 @@ else # 2 or 3 arguments were passed...
       elif [ $# -eq 3 ] # 3 arguments passed (dump table)
         then
           table=$3
-          sql=$destination/$table.sql
+          sql=$destination/$table-$date.sql
           read -p "Dump $table table to $destination?" # prompt user
           $MYSQLDUMP $MYSQLDUMP_OPTIONS $mysql_auth $database $table > $sql # dump table
           check_error $? "Dump $table to $sql"

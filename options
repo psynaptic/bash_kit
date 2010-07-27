@@ -15,7 +15,7 @@ export BASH_PROFILE="${BASH_PROFILE:-$HOME/.bash_profile}"
 export BASH_KIT_ALIASES="${BASH_KIT_ALIASES:-$HOME/.bash_aliases}"
 
 # Utility default options.
-export LS_OPTIONS="${LS_OPTIONS:---color=auto}"
+export LS_OPTIONS="${LS_OPTIONS:--G}"
 export GREP_OPTIONS="${GREP_OPTIONS:---color -n}"
 export MYSQLDUMP_OPTIONS="${MYSQLDUMP_OPTIONS:---extended-insert=false --ignore-table=cache --ignore-table=cache_block --ignore-table=cache_content --ignore-table=cache_filter --ignore-table=cache_menu --ignore-table=cache_views --ignore-table=cache_views_data}"
 

@@ -3,7 +3,7 @@
 # Essential.
 export BASH_KIT_DIR="/opt/bash_kit"
 export BASH_PROFILE="$HOME/.bash_profile"
-export DRUSH_PATH="/opt/local/drush/drush.php"
+export DRUSH_PATH="/opt/local/drush"
 
 # Database credentials.
 export DB_USER="root"

@@ -29,7 +29,7 @@ function aa () {
 }
 
 ##
-# Simple recursive grep helper. Searches for <regex pattern> within the
+# Simple recursive grep helper. Searches for <regexp pattern> within the
 # current dir.
 #
 function grepr () {
@@ -38,17 +38,19 @@ function grepr () {
     return
   fi
   local options=$GREP_OPTIONS
-  local regex=$1
+  local regexp=$1
 
   # Automatically escape spaces.
-  local search="${regex// /\W}"
+  local regexp="${regexp//(/\(}"
+  regexp="${regexp//)/\)}"
+  regexp="${regexp// /\W}"
 
   # If 3 parameters are passed, add the context option.
   if [ $# == 2 ]; then
     options="--context=$2 $GREP_OPTIONS"
   fi
 
-  grep "$search" $options -R .
+  grep "$regexp" $options -R .
 }
 
 ##

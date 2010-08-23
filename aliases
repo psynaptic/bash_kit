@@ -30,7 +30,7 @@ alias ga='add'
 alias gau='add -u'
 
 # drush
-alias drush="$DRUSH_PATH"
+alias drush="$DRUSH_PATH/drush"
 alias cc='drush cc all'
 alias cct='drush cc theme'
 alias f='drush features'

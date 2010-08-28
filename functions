@@ -249,3 +249,10 @@ function post-receive () {
   fi
   ssh $SSH "ln -s ${REPO_LOCATION}post-receive ${REPO_LOCATION}repositories/$1.git/hooks/"
 }
+
+##
+# List all repos on the main repo server.
+#
+function list () {
+  ssh $SSH "ls -1 ${REPO_LOCATION}repositories"
+}

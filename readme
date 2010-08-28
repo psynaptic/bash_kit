@@ -1,8 +1,13 @@
 Bash Kit
 ========
 
-1. Read through the profile_example file and copy the bits you need into your
-   main bash profile file. The exact variables and their values will depend on
-   your system.
+1. Figure out which profile file your system is using i.e. .profile or .bash_profile.
 
-2. Source your main profile. E.g. source ~/.profile
+2. Run the following commands:
+
+   $ cd path/to/bash_kit
+   $ cat profile_example >> ~/.profile
+
+3. Edit the variables to match your system.
+
+4. Source your main profile. E.g. source ~/.profile

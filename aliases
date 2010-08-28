@@ -28,6 +28,7 @@ alias pull='git pull origin master'
 alias push='git push origin master'
 alias ga='add'
 alias gau='add -u'
+alias git-color='git config --global color.diff auto'
 
 # drush
 alias drush="$DRUSH_PATH"

@@ -256,3 +256,10 @@ function post-receive () {
 function list () {
   ssh $SSH "ls -1 ${REPO_LOCATION}repositories"
 }
+
+##
+# Clone a project from git.drupal.org
+#
+function dclone () { 
+  git clone "git://git.drupal.org/projects/$1.git"
+}

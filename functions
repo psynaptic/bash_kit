@@ -37,10 +37,38 @@ function grepr () {
     echo "usage: grepr <regexp> [context]"
     return
   fi
-  local options=$ACK_OPTIONS
+
+  # Store the search string so we can manipulate it.
   local regexp=$1
 
   # Automatically escape certain characters.
+  regexp="${regexp//(/\(}"
+  regexp="${regexp//)/\)}"
+
+  # Figure out if ack is available and if so use it.
+  local binary=grep
+  which ack > /dev/null
+  if [ $? == "0" ]; then
+    binary=ack
+  fi
+  which ack-grep > /dev/null
+  if [ $? == "0" ]; then
+    binary=ack-grep
+  fi
+
+  # Things required for grep.
+  if [ $binary == 'grep' ]; then
+    # grep needs spaces escaping.
+    regexp="${regexp// /\W}"
+    local options=$GREP_OPTIONS
+  fi
+
+  # Things required for ack.
+  if [[ $binary == 'ack' || $binary == 'ack-grep' ]]; then
+    local options=$ACK_OPTIONS    
+  fi
+
+  # Both grep and ack need brackets escaping.
   regexp="${regexp//(/\(}"
   regexp="${regexp//)/\)}"
 
@@ -49,7 +77,7 @@ function grepr () {
     options="$options --context=$2"
   fi
 
-  ack "$regexp" $options
+  $binary "$regexp" $options
 }
 
 ##

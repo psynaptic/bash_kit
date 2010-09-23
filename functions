@@ -29,28 +29,27 @@ function aa () {
 }
 
 ##
-# Simple recursive grep helper. Searches for <regexp pattern> within the
-# current dir.
+# Simple recursive grep helper. Searches for <regexp pattern> recursively
+# within the current dir. Optionally, allows context.
 #
 function grepr () {
   if [ $# -lt 1 ]; then
     echo "usage: grepr <regexp> [context]"
     return
   fi
-  local options=$GREP_OPTIONS
+  local options=$ACK_OPTIONS
   local regexp=$1
 
   # Automatically escape certain characters.
-  regexp="${regexp// /\W}"
   regexp="${regexp//(/\(}"
   regexp="${regexp//)/\)}"
 
   # If 3 parameters are passed, add the context option.
   if [ $# == 2 ]; then
-    options="--context=$2 $GREP_OPTIONS"
+    options="$options --context=$2"
   fi
 
-  egrep "$regexp" $options -R .
+  ack "$regexp" $options
 }
 
 ##

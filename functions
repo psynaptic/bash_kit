@@ -47,11 +47,11 @@ function grepr () {
 
   # Figure out if ack is available and if so use it.
   local binary=grep
-  which ack > /dev/null
+  which ack > /dev/null 2>&1
   if [ $? == "0" ]; then
     binary=ack
   fi
-  which ack-grep > /dev/null
+  which ack-grep > /dev/null 2>&1
   if [ $? == "0" ]; then
     binary=ack-grep
   fi

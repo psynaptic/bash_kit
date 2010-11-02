@@ -172,7 +172,7 @@ function st () {
 #
 function blame () {
   if [ $VC == 'bzr' ]; then
-    $VC blame -all $*
+    $VC blame --all $*
   else
     $VC blame $*
   fi

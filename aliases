@@ -20,6 +20,7 @@ alias grep="grep $GREP_OPTIONS"
 alias df="df -h"
 alias c="clear"
 alias h="history"
+alias g="grepr"
 
 # git
 alias gc='ci'
@@ -29,6 +30,11 @@ alias push='git push origin master'
 alias ga='add'
 alias gau='add -u'
 alias git-color='git config --global color.diff auto'
+
+# vcs
+alias dif-count='echo `dif . | grep ^[+-][^+-] | wc -l` altered: "`dif | grep "^-[^-]" | wc -l` removed, `dif | grep "^+[^+]" | wc -l;` added";'
+alias praise="blame"
+alias diff-count="dif-count"
 
 # drush
 alias drush="$DRUSH_PATH"
@@ -48,3 +54,5 @@ alias mv='mv -i'
 alias sql="$BASH_KIT_DIR/bin/sql.sh"
 alias prepare="$BASH_KIT_DIR/bin/prepare.sh"
 alias cvs-release-notes="$BASH_KIT_DIR/bin/cvs-release-notes.php"
+
+

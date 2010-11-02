@@ -165,6 +165,20 @@ function st () {
 }
 
 ##
+# VCS agnostic blame.
+#
+# Usage:
+#   blame [args]
+#
+function blame () {
+  if [ $VC == 'bzr' ]; then
+    $VC blame -all $*
+  else
+    $VC blame $*
+  fi
+}
+
+##
 # Set up a git repo using the contents of the pwd.
 #
 # Usage:

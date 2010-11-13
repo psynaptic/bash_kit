@@ -1,4 +1,4 @@
-
+#!/bin/sh
 ##
 # Usage key:
 #   command <required> [optional]
@@ -243,7 +243,7 @@ function cvsco () {
     echo "cvsco <project-7.x-1.x-dev>"
     return
   fi
-  php $DRUSH_PATH dl --package-handler=cvs --cvscredentials=$CVS_USER --destination=`pwd` $1
+  $DRUSH_PATH dl --package-handler=cvs --cvscredentials=$CVS_USER --destination=`pwd` $1
 }
 
 function vc_evaluate () {

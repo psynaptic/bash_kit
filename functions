@@ -243,7 +243,7 @@ function cvsco () {
     echo "cvsco <project-7.x-1.x-dev>"
     return
   fi
-  $DRUSH_PATH dl --package-handler=cvs --cvscredentials=$CVS_USER --destination=`pwd` $1
+  $DRUSH_PATH dl --package-handler=cvs --cvscredentials=$CVS_USER $1
 }
 
 function vc_evaluate () {
@@ -303,4 +303,12 @@ function list () {
 #
 function dclone () { 
   git clone "git://git.drupal.org/projects/$1.git"
+}
+
+##
+# Create a new development site.
+# Assumes a drupal developer skeleton makefile dd.make in the current dir.
+#
+function dd () {
+  drush make dd.make $1
 }

@@ -119,6 +119,11 @@ case $mode in
     sql_create $database
   ;;
 
+  recreate)
+    sql_drop $database
+    sql_create $database
+  ;;
+
 
 dump)
 if [ $# -lt 2 ] || [ $# -gt 3 ] # if other than 2 or 3 arguments were given
@@ -200,6 +205,7 @@ exit
       echo "  sql import database       - import database"
       echo "  sql import database table - import table to database"
       echo "  sql create database       - create database"
+      echo "  sql recreate database     - drop and create a database"
       echo "  sql drop database         - drop database"
       echo "  sql execute <database> <command> - execute an sql query on the database"
   fi

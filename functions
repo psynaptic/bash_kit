@@ -1,4 +1,4 @@
-
+#!/bin/sh
 ##
 # Usage key:
 #   command <required> [optional]
@@ -29,26 +29,55 @@ function aa () {
 }
 
 ##
-# Simple recursive grep helper. Searches for <regex pattern> within the
-# current dir.
+# Simple recursive grep helper. Searches for <regexp pattern> recursively
+# within the current dir. Optionally, allows context.
 #
 function grepr () {
   if [ $# -lt 1 ]; then
     echo "usage: grepr <regexp> [context]"
     return
   fi
-  local options=$GREP_OPTIONS
-  local regex=$1
 
-  # Automatically escape spaces.
-  local search="${regex// /\W}"
+  # Store the search string so we can manipulate it.
+  local regexp=$1
+
+  # Automatically escape certain characters.
+  regexp="${regexp//(/\(}"
+  regexp="${regexp//)/\)}"
+
+  # Figure out if ack is available and if so use it.
+  local binary=grep
+  which ack > /dev/null 2>&1
+  if [ $? == "0" ]; then
+    binary=ack
+  fi
+  which ack-grep > /dev/null 2>&1
+  if [ $? == "0" ]; then
+    binary=ack-grep
+  fi
+
+  # Things required for grep.
+  if [ $binary == 'grep' ]; then
+    # grep needs spaces escaping.
+    regexp="${regexp// /\W}"
+    local options=$GREP_OPTIONS
+  fi
+
+  # Things required for ack.
+  if [[ $binary == 'ack' || $binary == 'ack-grep' ]]; then
+    local options=$ACK_OPTIONS    
+  fi
+
+  # Both grep and ack need brackets escaping.
+  regexp="${regexp//(/\(}"
+  regexp="${regexp//)/\)}"
 
   # If 3 parameters are passed, add the context option.
   if [ $# == 2 ]; then
-    options="--context=$2 $GREP_OPTIONS"
+    options="$options --context=$2"
   fi
 
-  grep "$search" $options -R .
+  $binary "$regexp" $options
 }
 
 ##
@@ -136,6 +165,20 @@ function st () {
 }
 
 ##
+# VCS agnostic blame.
+#
+# Usage:
+#   blame [args]
+#
+function blame () {
+  if [ $VC == 'bzr' ]; then
+    $VC blame --all $*
+  else
+    $VC blame $*
+  fi
+}
+
+##
 # Set up a git repo using the contents of the pwd.
 #
 # Usage:
@@ -199,10 +242,10 @@ function cvslogin () {
 #
 function cvsco () {
   if [ $# -lt 1 ]; then
-    echo "cvsco <project-version>"
+    echo "cvsco <project-7.x-1.x-dev>"
     return
   fi
-  php $DRUSH_PATH dl --package-handler=cvs --cvscredentials=$CVS_USER --destination=`pwd` $1
+  $DRUSH_PATH dl --package-handler=cvs --cvscredentials=$CVS_USER $1
 }
 
 function vc_evaluate () {
@@ -248,4 +291,26 @@ function post-receive () {
     return
   fi
   ssh $SSH "ln -s ${REPO_LOCATION}post-receive ${REPO_LOCATION}repositories/$1.git/hooks/"
+}
+
+##
+# List all repos on the main repo server.
+#
+function list () {
+  ssh $SSH "ls -1 ${REPO_LOCATION}repositories"
+}
+
+##
+# Clone a project from git.drupal.org
+#
+function dclone () { 
+  git clone "git://git.drupal.org/projects/$1.git"
+}
+
+##
+# Create a new development site.
+# Assumes a drupal developer skeleton makefile dd.make in the current dir.
+#
+function dd () {
+  drush make dd.make $1
 }

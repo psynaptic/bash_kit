@@ -4,7 +4,7 @@ alias r="source $BASH_PROFILE"
 alias p="$EDITOR $BASH_PROFILE"
 alias a="$EDITOR $BASH_KIT_ALIASES"
 alias bk="$EDITOR $BASH_KIT_DIR"
-alias ip="printf 'Your IP Address is: ';curl http://www.whatismyip.com/automation/n09230945.asp;printf '\n'"
+alias ip="printf 'Your IP Address is: '; curl http://www.whatismyip.com/automation/n09230945.asp;printf '\n'"
 
 # list
 alias l="ls"
@@ -20,6 +20,7 @@ alias grep="grep $GREP_OPTIONS"
 alias df="df -h"
 alias c="clear"
 alias h="history"
+alias g="grepr"
 
 # git
 alias gc='ci'
@@ -28,6 +29,12 @@ alias pull='git pull origin master'
 alias push='git push origin master'
 alias ga='add'
 alias gau='add -u'
+alias git-color='git config --global color.diff auto'
+
+# vcs
+alias dif-count='echo `dif . | grep ^[+-][^+-] | wc -l` altered: "`dif | grep "^-[^-]" | wc -l` removed, `dif | grep "^+[^+]" | wc -l;` added";'
+alias praise="blame"
+alias diff-count="dif-count"
 
 # drush
 alias drush="$DRUSH_PATH/drush"
@@ -47,3 +54,5 @@ alias mv='mv -i'
 alias sql="$BASH_KIT_DIR/bin/sql.sh"
 alias prepare="$BASH_KIT_DIR/bin/prepare.sh"
 alias cvs-release-notes="$BASH_KIT_DIR/bin/cvs-release-notes.php"
+
+

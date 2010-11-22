@@ -192,9 +192,14 @@ function cvslogin () {
   cvs login
 }
 
+##
+# Interface to the CVS checkout command.
+#
+# Remember to use `cvsco module-7.x-1.x` syntax.
+#
 function cvsco () {
   if [ $# -lt 1 ]; then
-    echo "cvsco <project>"
+    echo "cvsco <project-version>"
     return
   fi
   php $DRUSH_PATH dl --package-handler=cvs --cvscredentials=$CVS_USER --destination=`pwd` $1

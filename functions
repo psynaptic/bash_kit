@@ -310,5 +310,14 @@ function dclone () {
 # Assumes a drupal developer skeleton makefile dd.make in the current dir.
 #
 function dd () {
-  drush make dd.make $1
+  MAKEFILE="${MAKEFILES}dd.make"
+  dmake $MAKEFILE $1
+  sql create drupal_$1
+}
+
+##
+# Run a makefile for a given target. Should be used internally.
+#
+function dmake() {
+  drush make $1 $2
 }

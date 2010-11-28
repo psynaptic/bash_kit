@@ -27,3 +27,6 @@ export MYSQLDUMP="${MYSQLDUMP:-mysqldump}"
 
 # SSH credentials
 export SSH="${ROOT_DEV:-root@dev.fs}"
+
+# Makefile locations
+export MAKEFILES="${MAKEFILES:-$HOME/projects/makefiles/}"

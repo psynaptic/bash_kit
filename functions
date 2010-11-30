@@ -14,7 +14,7 @@ function aa () {
   if [ $# -lt 2 ]; then
     echo "usage: add <alias> <command>"
     return
-  fi 
+  fi
   local command=$1
   shift 1
   alias="alias $command='$@'"
@@ -65,7 +65,7 @@ function grepr () {
 
   # Things required for ack.
   if [[ $binary == 'ack' || $binary == 'ack-grep' ]]; then
-    local options=$ACK_OPTIONS    
+    local options=$ACK_OPTIONS
   fi
 
   # Both grep and ack need brackets escaping.
@@ -303,7 +303,7 @@ function list () {
 ##
 # Clone a project from git.drupal.org
 #
-function dclone () { 
+function dclone () {
   git clone "git://git.drupal.org/projects/$1.git"
 }
 

@@ -19,6 +19,7 @@ export LS_OPTIONS="${LS_OPTIONS:--G}"
 export GREP_OPTIONS="${GREP_OPTIONS:---color -n}"
 export ACK_OPTIONS="${ACK_OPTIONS:--a}"
 export MYSQLDUMP_OPTIONS="${MYSQLDUMP_OPTIONS:---extended-insert=false --ignore-table=cache --ignore-table=cache_block --ignore-table=cache_content --ignore-table=cache_filter --ignore-table=cache_menu --ignore-table=cache_views --ignore-table=cache_views_data}"
+export MYSQL_OPTIONS="${MYSQL_OPTIONS:-}"
 
 # MySQL binaries
 export MYSQL="${MYSQL:-mysql}"

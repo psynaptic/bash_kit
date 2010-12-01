@@ -186,6 +186,17 @@ function cdd() {
 }
 
 ##
+# Command to run a merge commit.
+#
+function merged() {
+  if [ $# -lt 1 ]; then
+    echo "usage: merged <branch>"
+    return
+  fi
+  $VC commit -m "Merged from $1"
+}
+
+##
 # Quickly switch cvs logins.
 #
 function cvslogin () {

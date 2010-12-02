@@ -21,6 +21,7 @@ alias df="df -h"
 alias c="clear"
 alias h="history"
 alias g="grepr"
+alias v="vim"
 
 # git
 alias gc='ci'

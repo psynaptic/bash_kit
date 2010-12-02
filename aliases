@@ -30,7 +30,7 @@ alias pull='git pull origin master'
 alias push='git push origin master'
 alias ga='add'
 alias gau='add -u'
-alias git-color='git config --global color.diff auto'
+alias git-color='git config --global color.diff auto; git config --global color.status auto; git config --global color.branch auto;'
 
 # vcs
 alias dif-count='echo `dif . | grep ^[+-][^+-] | wc -l` altered: "`dif | grep "^-[^-]" | wc -l` removed, `dif | grep "^+[^+]" | wc -l;` added";'

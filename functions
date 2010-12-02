@@ -182,7 +182,21 @@ function blame () {
 # Drush drupal-directory helper.
 #
 function cdd() {
-  cd `drush dd $1`
+  pushd `drush dd $@`> /dev/null
+}
+
+##
+# Remap cd to use pushd and supress output. This silently keeps a history of all directories.
+#
+function cd () {
+  pushd "$@" > /dev/null
+}
+
+##
+# Provides a quick and silent method for stepping back through the directory history.
+#
+function pd () {
+  popd "$@" > /dev/null
 }
 
 ##

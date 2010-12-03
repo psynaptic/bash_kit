@@ -5,7 +5,10 @@
 #
 
 ##
-# Function to facilitate creation of new aliases.
+# Add Alias.
+#
+# Add aliases that persist beyond the current session by appending them to the
+# file defained by the BASH_KIT_ALIASES variable.
 #
 function aa () {
   if [ ! -f $BASH_KIT_ALIASES ]; then
@@ -266,7 +269,6 @@ function vc_is_svn () {
   svn info &>/dev/null
 }
 
-# @todo: figure out a *fast* way to determine if a dir is a cvs repo.
 function vc_is_cvs () {
   ls CVS &>/dev/null
 }
@@ -312,3 +314,4 @@ function dd () {
 function dmake() {
   $drush make $1 $2
 }
+

@@ -177,7 +177,7 @@ sql_create $database
 
 file=$3
 # If the file ends with .gz it is probably a gzipped dump.
-if [ ${file: -3} == ".gz" ]
+if [[ ${file: -3} == ".gz" ]]
 then
   gunzip $file | $MYSQL $mysql_auth $database
 else

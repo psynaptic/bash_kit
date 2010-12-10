@@ -315,3 +315,9 @@ function dmake() {
   $drush make $1 $2
 }
 
+##
+# Open given module in the default editor.
+#
+function e () {
+  $EDITOR `drush dd $@`
+}

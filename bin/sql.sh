@@ -61,20 +61,20 @@ function check_error {
 }
 
 function sql_drop {
-  $MYSQL $mysql_auth -e "DROP DATABASE IF EXISTS $1";
+  $MYSQL $mysql_auth $MYSQL_OPTIONS -e "DROP DATABASE IF EXISTS $1";
 }
 
 function sql_show {
-  $MYSQL $mysql_auth -e "SHOW DATABASES";
+  $MYSQL $mysql_auth $MYSQL_OPTIONS -e "SHOW DATABASES";
 }
 
 function sql_execute {
   # We have to pass the database name, otherwise a command like "SELECT nid FROM node;" would fail.
-  $MYSQL $mysql_auth -D $1 -e "$2"
+  $MYSQL $mysql_auth $MYSQL_OPTIONS -D $1 -e "$2"
 }
 
 function sql_check {
-  SCHEMA=`$MYSQL $mysql_auth -e "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$1'"`;
+  SCHEMA=`$MYSQL $mysql_auth $MYSQL_OPTIONS -e "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$1'"`;
   if [ -z "$SCHEMA" ]; then
     return 1;
   else
@@ -83,12 +83,12 @@ function sql_check {
 }
 
 function sql_create {
-  $MYSQLADMIN $mysql_auth create $database
+  $MYSQLADMIN $mysql_auth $MYSQL_OPTIONS create $database
   check_error $? "Create $database"
 }
 
 case $mode in
-  
+
   check)
     sql_check $database;
   ;;
@@ -107,9 +107,9 @@ case $mode in
   ;;
 
   use)
-    $MYSQL $mysql_auth $database
+    $MYSQL $mysql_auth $MYSQL_OPTIONS $database
   ;;
-  
+
   execute)
     # Argument must be in "" otherwise it is treated separately in sql_execute
     sql_execute $database "$3"
@@ -149,7 +149,7 @@ else # 2 or 3 arguments were passed...
         then
           sql=$destination/$database-$date.sql
           read -p "Dump $database database to $destination?" # prompt user
-          $MYSQLDUMP $MYSQLDUMP_OPTIONS $mysql_auth $database > $sql # dump database
+          $MYSQLDUMP $MYSQLDUMP_OPTIONS $mysql_auth $MYSQL_OPTIONS $database > $sql # dump database
           check_error $? "Dump $database to $sql"
           exit
       elif [ $# -eq 3 ] # 3 arguments passed (dump table)
@@ -157,7 +157,7 @@ else # 2 or 3 arguments were passed...
           table=$3
           sql=$destination/$table-$date.sql
           read -p "Dump $table table to $destination?" # prompt user
-          $MYSQLDUMP $MYSQLDUMP_OPTIONS $mysql_auth $database $table > $sql # dump table
+          $MYSQLDUMP $MYSQLDUMP_OPTIONS $mysql_auth $MYSQL_OPTIONS $database $table > $sql # dump table
           check_error $? "Dump $table to $sql"
           exit
       fi
@@ -177,11 +177,11 @@ sql_create $database
 
 file=$3
 # If the file ends with .gz it is probably a gzipped dump.
-if [ ${file: -3} == ".gz" ]
+if [[ ${file: -3} == ".gz" ]]
 then
   gunzip $file | $MYSQL $mysql_auth $database
 else
-  $MYSQL $mysql_auth $database < $file
+  $MYSQL $mysql_auth $MYSQL_OPTIONS $database < $file
 fi
 
 check_error $? "Import $database"

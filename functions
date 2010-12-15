@@ -5,7 +5,10 @@
 #
 
 ##
-# Function to facilitate creation of new aliases.
+# Add Alias.
+#
+# Add aliases that persist beyond the current session by appending them to the
+# file defained by the BASH_KIT_ALIASES variable.
 #
 function aa () {
   if [ ! -f $BASH_KIT_ALIASES ]; then
@@ -14,7 +17,7 @@ function aa () {
   if [ $# -lt 2 ]; then
     echo "usage: add <alias> <command>"
     return
-  fi 
+  fi
   local command=$1
   shift 1
   alias="alias $command='$@'"
@@ -65,7 +68,7 @@ function grepr () {
 
   # Things required for ack.
   if [[ $binary == 'ack' || $binary == 'ack-grep' ]]; then
-    local options=$ACK_OPTIONS    
+    local options=$ACK_OPTIONS
   fi
 
   # Both grep and ack need brackets escaping.
@@ -179,48 +182,35 @@ function blame () {
 }
 
 ##
-# Set up a git repo using the contents of the pwd.
+# Drush drupal-directory helper.
 #
-# Usage:
-#   gitsetup <repo>
-#
-function gitsetup () {
-  # if an argument is not given use the directory name
-  if [[ -n $1 ]]; then
-    repo="$1"
-  else
-    repo=`basename "$PWD"`
-  fi
-  location="$REPO_LOCATION/$repo.git"
-  git init
-  git add .
-  git commit -m "Initial commit."
-  git remote add origin $REPO_SERVER:$location
-  git push origin master
-}
-
-function gitmigrate () {
-  git remote rm origin
-  git remote add origin git@dev.fs:$1
-  read -p "Add $1 to gitosis."
-  ssh $SSH "ln -s /home/git/post-receive /home/git/repositories/$1.git/hooks/"
-  push
+function cdd() {
+  pushd `drush dd $@`> /dev/null
 }
 
 ##
-# Allow a repository to be readable by git-daemon.
+# Remap cd to use pushd and supress output. This silently keeps a history of all directories.
 #
-# Usage:
-#   gitexport [repo]
+function cd () {
+  pushd "$@" > /dev/null
+}
+
+##
+# Provides a quick and silent method for stepping back through the directory history.
 #
-function gitexport () {
-  # if an argument is not given use the directory name
-  if [[ -n $1 ]]; then
-    repo="$1"
-  else
-    repo=`basename "$PWD"`
+function pd () {
+  popd "$@" > /dev/null
+}
+
+##
+# Command to run a merge commit.
+#
+function merged() {
+  if [ $# -lt 1 ]; then
+    echo "usage: merged <branch>"
+    return
   fi
-  ssh $REPO_SERVER "touch $REPO_LOCATION/$repo.git/git-daemon-export-ok"
+  $VC commit -m "Merged from $1"
 }
 
 ##
@@ -261,10 +251,10 @@ function vc_evaluate () {
     echo "This is an svn repo."
     return
   fi
-  # if vc_is_cvs; then
-  #   echo "This is a cvs repo."
-  #   return
-  # fi
+  if vc_is_cvs; then
+    echo "This is a cvs repo."
+    return
+  fi
 }
 
 function vc_is_git () {
@@ -279,8 +269,9 @@ function vc_is_svn () {
   svn info &>/dev/null
 }
 
-# @todo: figure out a *fast* way to determine if a dir is a cvs repo.
-#function vc_is_cvs () {}
+function vc_is_cvs () {
+  ls CVS &>/dev/null
+}
 
 ##
 # Add the post-receive hook into a project's repo.
@@ -303,7 +294,7 @@ function list () {
 ##
 # Clone a project from git.drupal.org
 #
-function dclone () { 
+function dclone () {
   git clone "git://git.drupal.org/projects/$1.git"
 }
 
@@ -312,5 +303,21 @@ function dclone () {
 # Assumes a drupal developer skeleton makefile dd.make in the current dir.
 #
 function dd () {
-  drush make dd.make $1
+  MAKEFILE="${DRUSH_MAKEFILES}dd.make"
+  dmake $MAKEFILE $1
+  sql create drupal_$1
+}
+
+##
+# Run a makefile for a given target. Should be used internally.
+#
+function dmake() {
+  $drush make $1 $2
+}
+
+##
+# Open given module in the default editor.
+#
+function e () {
+  $EDITOR `drush dd $@`
 }

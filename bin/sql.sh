@@ -181,7 +181,7 @@ if [[ ${file: -3} == ".gz" ]]
 then
   gunzip $file | $MYSQL $mysql_auth $database
 else
-  $MYSQL $mysql_auth $MYSQL_OPTIONS $database < $file
+  $MYSQL $mysql_auth $MYSQL_OPTIONS $database < "$file"
 fi
 
 check_error $? "Import $database"

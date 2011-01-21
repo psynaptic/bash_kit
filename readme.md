@@ -13,7 +13,7 @@ Installation:
 2. Run the following commands:
 
         cd path/to/bash_kit
-        cat profile\_example >> ~/.bash_profile
+        cat profile_example >> ~/.bash_profile
 
 3. Edit the variables in your profile file to suit your workflow.
 

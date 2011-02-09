@@ -87,6 +87,11 @@ function sql_create {
   check_error $? "Create $database"
 }
 
+function sql_create_table {
+  $MYSQL $mysql_auth $MYSQL_OPTIONS -D $1 -e "CREATE TABLE $3 LIKE $2";
+  $MYSQL $mysql_auth $MYSQL_OPTIONS -D $1 -e "INSERT INTO $3 SELECT * FROM $2";
+}
+
 case $mode in
 
   check)
@@ -122,6 +127,10 @@ case $mode in
   recreate)
     sql_drop $database
     sql_create $database
+  ;;
+
+  clone-table)
+    sql_create_table $database "$3" "$4"
   ;;
 
 

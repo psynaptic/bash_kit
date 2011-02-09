@@ -87,9 +87,12 @@ function sql_create {
   check_error $? "Create $database"
 }
 
-function sql_create_table {
-  $MYSQL $mysql_auth $MYSQL_OPTIONS -D $1 -e "CREATE TABLE $3 LIKE $2";
-  $MYSQL $mysql_auth $MYSQL_OPTIONS -D $1 -e "INSERT INTO $3 SELECT * FROM $2";
+function sql_clone_table {
+  source=$2
+  target=$3
+  echo "Cloning table $source to $target...";
+  $MYSQL $mysql_auth $MYSQL_OPTIONS -D $1 -e "CREATE TABLE $target LIKE $source";
+  $MYSQL $mysql_auth $MYSQL_OPTIONS -D $1 -e "INSERT INTO $target SELECT * FROM $source";
 }
 
 case $mode in
@@ -130,9 +133,8 @@ case $mode in
   ;;
 
   clone-table)
-    sql_create_table $database "$3" "$4"
+    sql_clone_table $database "$3" "$4"
   ;;
-
 
 dump)
 if [ $# -lt 2 ] || [ $# -gt 3 ] # if other than 2 or 3 arguments were given
@@ -217,6 +219,7 @@ exit
       echo "  sql recreate database     - drop and create a database"
       echo "  sql drop database         - drop database"
       echo "  sql execute <database> <command> - execute an sql query on the database"
+      echo "  sql clone-table <database> <source> <target> - clone source database table to target"
   fi
 ;;
 

@@ -25,11 +25,11 @@ alias v="vim"
 
 # git
 alias gc='ci'
-alias gpom='git push origin master'
-alias pull='git pull origin master'
-alias push='git push origin master'
 alias ga='add'
 alias gau='add -u'
+alias pull='git pull origin master'
+alias push='git push origin master'
+alias gpom='push'
 alias git-color='git config --global color.diff auto; git config --global color.status auto; git config --global color.branch auto;'
 
 # vcs

@@ -4,6 +4,7 @@
 export VC="${VC:-git}"
 export CVS_DIFF_OPTIONS="${CVS_DIFF_OPTIONS:--up}"
 export REPO_LOCATION="${REPO_LOCATION:-/home/git/}"
+export VC_AUTOPUSH="${VC_AUTOPUSH:-1}"
 
 # Shell defaults.
 export EDITOR="${EDITOR:-vim}"

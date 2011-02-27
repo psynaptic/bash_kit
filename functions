@@ -137,7 +137,7 @@ function ci () {
   message="$1"
   shift 1
   $VC commit -m "$message" $*
-  if [ "$VC" == 'git' ]; then
+  if [[ "$VC" == 'git'  && "$VC_AUTOPUSH" == 1 ]]; then
     BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
     git push origin $BRANCH
   fi

@@ -10,7 +10,6 @@ export DB_PASS=""
 export MYSQL_OPTIONS=""
 
 # Version control.
-export CVS_USER="username"
 export REPO_SERVER="git@example.com"
 export REPO_LOCATION="${REPO_LOCATION:-/home/git/}"
 

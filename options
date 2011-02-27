@@ -2,8 +2,6 @@
 
 # Version control defaults.
 export VC="${VC:-git}"
-export CVSROOT="${CVSROOT:-:pserver:$CVS_USER@cvs.drupal.org:/cvs/drupal-contrib}"
-export CVS_RSH="${CVS_RSH:-ssh}"
 export CVS_DIFF_OPTIONS="${CVS_DIFF_OPTIONS:--up}"
 export REPO_LOCATION="${REPO_LOCATION:-/home/git/}"
 
@@ -31,4 +29,3 @@ export SSH="${ROOT_DEV:-root@dev.fs}"
 
 # Makefile locations
 export DRUSH_MAKEFILES="${DRUSH_MAKEFILES:-$HOME/projects/makefiles/}"
-

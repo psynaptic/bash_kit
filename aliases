@@ -54,6 +54,3 @@ alias mv='mv -i'
 # included scripts
 alias sql="$BASH_KIT_DIR/bin/sql.sh"
 alias prepare="$BASH_KIT_DIR/bin/prepare.sh"
-alias cvs-release-notes="$BASH_KIT_DIR/bin/cvs-release-notes.php"
-
-

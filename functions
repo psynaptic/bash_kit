@@ -213,31 +213,6 @@ function merged() {
   $VC commit -m "Merged from $1"
 }
 
-##
-# Quickly switch cvs logins.
-#
-function cvslogin () {
-  if [ $# -lt 1 ]; then
-    echo "cvslogin <username>"
-    return
-  fi
-  export CVSROOT=":pserver:$1@cvs.drupal.org:/cvs/drupal-contrib"
-  cvs login
-}
-
-##
-# Interface to the CVS checkout command.
-#
-# Remember to use `cvsco module-7.x-1.x` syntax.
-#
-function cvsco () {
-  if [ $# -lt 1 ]; then
-    echo "cvsco <project-7.x-1.x-dev>"
-    return
-  fi
-  drush dl --package-handler=cvs --cvscredentials=$CVS_USER $1 --destination=`pwd`
-}
-
 function vc_evaluate () {
   if vc_is_git; then
     echo "This is a git repo."

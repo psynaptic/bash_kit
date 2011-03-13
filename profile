@@ -25,8 +25,7 @@ if [ -f $BASH_KIT_DIR/colours ]; then
   . $BASH_KIT_DIR/colours
 fi
 
-
-# Prompt to $host: /$pwd> in cyan
+# Command prompt
 PS1="\[$text_blue\]\u@\h: \w\[$reset\]\[$bold_blue\]>\[$reset\] "
 
 # Make bash autocomplete with up arrow

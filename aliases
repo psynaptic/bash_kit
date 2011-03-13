@@ -1,12 +1,11 @@
-
-# shortcuts
+# Shortcuts
 alias r="source $BASH_PROFILE"
 alias p="$EDITOR $BASH_PROFILE"
 alias a="$EDITOR $BASH_KIT_ALIASES"
 alias bk="cd $BASH_KIT_DIR"
 alias ip="printf 'Your IP Address is: '; curl http://icanhazip.com/"
 
-# list
+# ls
 alias l="ls"
 alias ll="ls $LS_OPTIONS -Flh"
 alias la="ls $LS_OPTIONS -a"
@@ -15,7 +14,7 @@ alias lt="ls $LS_OPTIONS -lt"
 alias ld="ls $LS_OPTIONS -h */"
 alias lc="ls -1 | wc -l"
 
-# remap
+# Remappings
 alias grep="grep $GREP_OPTIONS"
 alias df="df -h"
 alias c="clear"
@@ -32,12 +31,12 @@ alias push='git push origin master'
 alias gpom='push'
 alias git-color='git config color.ui true'
 
-# vcs
+# VCS
 alias dif-count='echo `dif . | grep ^[+-][^+-] | wc -l` altered: "`dif | grep "^-[^-]" | wc -l` removed, `dif | grep "^+[^+]" | wc -l;` added";'
 alias praise="blame"
 alias diff-count="dif-count"
 
-# drush
+# Drush
 alias drush="$DRUSH_PATH/drush"
 alias cc='drush cc all'
 alias cct='drush cc theme'
@@ -45,12 +44,12 @@ alias f='drush features'
 alias fu='drush features-update -y'
 alias fr='drush features-revert -y'
 
-# safety net
+# Safety net
 alias rm='rm -i'
 alias rr="rm -ri"
 alias cp='cp -i'
 alias mv='mv -i'
 
-# included scripts
+# Scripts
 alias sql="$BASH_KIT_DIR/bin/sql.sh"
 alias prepare="$BASH_KIT_DIR/bin/prepare.sh"

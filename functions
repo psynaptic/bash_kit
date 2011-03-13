@@ -249,33 +249,17 @@ function vc_is_cvs () {
 }
 
 ##
-# Add the post-receive hook into a project's repo.
-#
-function post-receive () {
-  if [ $# -lt 1 ]; then
-    echo "post-receive <project>"
-    return
-  fi
-  ssh $SSH "ln -s ${REPO_LOCATION}post-receive ${REPO_LOCATION}repositories/$1.git/hooks/"
-}
-
-##
-# List all repos on the main repo server.
-#
-function list () {
-  ssh $SSH "ls -1 ${REPO_LOCATION}repositories"
-}
-
-##
 # Clone a project from git.drupal.org
 #
 function dclone () {
-  git clone "git://git.drupal.org/projects/$1.git"
+  git clone "git://git.drupal.org/project/$1.git"
 }
 
 ##
 # Create a new development site.
-# Assumes a drupal developer skeleton makefile dd.make in the current dir.
+#
+# Assumes a Drupal Developer profile skeleton makefile named dd.make in the
+# current directory.
 #
 function dd () {
   MAKEFILE="${DRUSH_MAKEFILES}dd.make"

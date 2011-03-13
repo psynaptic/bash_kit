@@ -1,28 +1,13 @@
-
-# Essential.
 export BASH_KIT_DIR="/opt/bash_kit"
 export BASH_PROFILE="$HOME/.bash_profile"
 export DRUSH_PATH="/opt/local/drush"
-
-# Database credentials.
 export DB_USER="root"
 export DB_PASS=""
 export MYSQL_OPTIONS=""
 
-# Version control.
-export REPO_SERVER="git@example.com"
-export REPO_LOCATION="${REPO_LOCATION:-/home/git/}"
-
-# SSH credentials
-export SSH="${ROOT_DEV:-root@example.com}"
-
-# Utility default options.
-#export EDITOR="mate -w"
-#export LS_OPTIONS="${LS_OPTIONS:---color=auto}"
-#export GREP_OPTIONS="${GREP_OPTIONS:---color -n}"
+# Import bash_kit
 
 if [ "$BASH" ]; then
-  # Import bash_kit
   if [ -f $BASH_KIT_DIR/profile ]; then
     . $BASH_KIT_DIR/profile
   fi

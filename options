@@ -1,32 +1,34 @@
 #!/bin/sh
 
-# Version control defaults.
-export VC="${VC:-git}"
-export CVS_DIFF_OPTIONS="${CVS_DIFF_OPTIONS:--up}"
-export REPO_LOCATION="${REPO_LOCATION:-/home/git/}"
-export VC_AUTOPUSH="${VC_AUTOPUSH:-1}"
+##
+# Default options for bash_kit.
+#
+# This file contains default settings for environment variables used by
+# bash_kit. The values of these settings can be overridden in your bash
+# profile.
+#
 
-# Shell defaults.
-export EDITOR="${EDITOR:-vim}"
-
-# Bash kit defaults.
+# Bash kit
 export BASH_PROFILE="${BASH_PROFILE:-$HOME/.bash_profile}"
 export BASH_KIT_ALIASES="${BASH_KIT_ALIASES:-$HOME/.bash_aliases}"
 
-# Utility default options.
+# Version control
+export VC="${VC:-git}"
+export VC_AUTOPUSH="${VC_AUTOPUSH:-1}"
+export CVS_DIFF_OPTIONS="${CVS_DIFF_OPTIONS:--up}"
+
+# Shell utilities
+export EDITOR="${EDITOR:-vim}"
 export LS_OPTIONS="${LS_OPTIONS:--G}"
 export GREP_OPTIONS="${GREP_OPTIONS:---color -n}"
 export ACK_OPTIONS="${ACK_OPTIONS:--a}"
-export MYSQLDUMP_OPTIONS="${MYSQLDUMP_OPTIONS:---extended-insert=false --ignore-table=cache --ignore-table=cache_block --ignore-table=cache_content --ignore-table=cache_filter --ignore-table=cache_menu --ignore-table=cache_views --ignore-table=cache_views_data}"
-export MYSQL_OPTIONS="${MYSQL_OPTIONS:-}"
 
-# MySQL binaries
+# MySQL
 export MYSQL="${MYSQL:-mysql}"
 export MYSQLADMIN="${MYSQLADMIN:-mysqladmin}"
 export MYSQLDUMP="${MYSQLDUMP:-mysqldump}"
+export MYSQLDUMP_OPTIONS="${MYSQLDUMP_OPTIONS:---extended-insert=false --ignore-table=cache --ignore-table=cache_block --ignore-table=cache_content --ignore-table=cache_filter --ignore-table=cache_menu --ignore-table=cache_views --ignore-table=cache_views_data}"
+export MYSQL_OPTIONS="${MYSQL_OPTIONS:-}"
 
-# SSH credentials
-export SSH="${ROOT_DEV:-root@dev.fs}"
-
-# Makefile locations
+# Drush
 export DRUSH_MAKEFILES="${DRUSH_MAKEFILES:-$HOME/projects/makefiles/}"

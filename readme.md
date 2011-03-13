@@ -20,4 +20,3 @@ Installation:
 4. Source your main profile.
 
         source ~/.bash_profile
-

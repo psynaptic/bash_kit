@@ -156,3 +156,65 @@ function blame () {
     $VC blame $*
   fi
 }
+
+##
+# Function for running a merge commit.
+#
+# It is common to merge one branch into another on a regular basis. This
+# function saves a bit of typing when doing such merged repeatedly.
+#
+# Usage:
+#   merged <branch>
+#
+# Example:
+#   merged trunk    # Runs, for example, bzr commit -m "Merged from trunk."
+#
+function merged() {
+  if [ $# -lt 1 ]; then
+    echo "usage: merged <branch>"
+    return
+  fi
+  $VC commit -m "Merged from $1"
+}
+
+##
+# Evaluate the type of Version Control System used for the current directory.
+#
+# This function was created to automatically switch version control systems
+# but if not currently being used for this purpose.
+#
+function vc_evaluate () {
+  if vc_is_git; then
+    echo "This is a git repo."
+    return
+  fi
+  if vc_is_bzr; then
+    echo "This is a bzr repo."
+    return
+  fi
+  if vc_is_svn; then
+    echo "This is an svn repo."
+    return
+  fi
+  if vc_is_cvs; then
+    echo "This is a cvs repo."
+    return
+  fi
+  echo "Cannot determine VCS. This directory does not seem to be under version control."
+}
+
+function vc_is_git () {
+  git branch &>/dev/null
+}
+
+function vc_is_bzr () {
+  bzr status &>/dev/null
+}
+
+function vc_is_svn () {
+  svn info &>/dev/null
+}
+
+function vc_is_cvs () {
+  ls CVS &>/dev/null
+}

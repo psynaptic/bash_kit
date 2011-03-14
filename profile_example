@@ -7,7 +7,7 @@ export DB_PASS=""
 
 # Import bash_kit
 if [ "$BASH" ]; then
-  if [ -f $BASH_KIT_DIR/profile ]; then
-    . $BASH_KIT_DIR/profile
+  if [ -f "$BASH_KIT_DIR/profile" ]; then
+    . "$BASH_KIT_DIR/profile"
   fi
 fi

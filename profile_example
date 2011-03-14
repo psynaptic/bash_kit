@@ -1,3 +1,4 @@
+# Set bash kit environment variables
 export BASH_KIT_DIR="/opt/bash_kit"
 export BASH_PROFILE="$HOME/.bash_profile"
 export DRUSH_PATH="/opt/local/drush"
@@ -6,7 +7,6 @@ export DB_PASS=""
 export MYSQL_OPTIONS=""
 
 # Import bash_kit
-
 if [ "$BASH" ]; then
   if [ -f $BASH_KIT_DIR/profile ]; then
     . $BASH_KIT_DIR/profile

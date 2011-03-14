@@ -18,9 +18,7 @@ The recommended way to install bash kit is via git. Using this method you will b
 
     git clone git://github.com/psynaptic/bash_kit.git
 
-If you do not have git installed on your machine you can download an archive from github:
-
-    http://github.com/psynaptic/download
+If you do not have git installed on your machine you can [download an archive](https://github.com/psynaptic/bash_kit/archives/master) from github:
 
 ###Append variables to your bash profile
 

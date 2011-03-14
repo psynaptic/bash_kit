@@ -8,13 +8,6 @@ By collaborating on a single package, we hope to avoid the duplication of effort
 
 Do yourself and other users a favour by unifying our command line workflows, and save some carpal tunnel in the process!
 
-* Installation
-  * Download bash kit
-  * Append variables to your bash profile
-  * Source your bash profile
-* Usage
-  * 
-
 ##Installation
 
 ###Download bash kit

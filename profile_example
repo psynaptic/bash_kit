@@ -4,7 +4,6 @@ export BASH_PROFILE="$HOME/.bash_profile"
 export DRUSH_PATH="/opt/local/drush"
 export DB_USER="root"
 export DB_PASS=""
-export MYSQL_OPTIONS=""
 
 # Import bash_kit
 if [ "$BASH" ]; then

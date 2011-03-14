@@ -12,7 +12,7 @@ Do yourself and other users a favour by unifying our command line workflows, and
 
 ###Download bash kit
 
-Clone or otherwise download bash kit to your computer. The recommended install location is /opt/local/bash_kit, but you can customise this.
+Clone or otherwise download bash kit to your computer. The recommended install location is `/opt/local/bash_kit`, but you can customise this.
 
 The recommended way to install bash kit is via git. Using this method you will be able to pull in new changes without too much effort. To clone using git run the following in terminal (assuming you already have git installed on the machine):
 

@@ -30,6 +30,7 @@ alias pull='git pull origin master'
 alias push='git push origin master'
 alias gpom='push'
 alias git-color='git config color.ui true'
+alias switch-origin='git remote rm origin; git remote add origin'
 
 # VCS
 alias dif-count='echo `dif . | grep ^[+-][^+-] | wc -l` altered: "`dif | grep "^-[^-]" | wc -l` removed, `dif | grep "^+[^+]" | wc -l;` added";'

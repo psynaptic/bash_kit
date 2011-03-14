@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ##
-# Default options for bash_kit.
+# Default options for bash kit.
 #
 # This file contains default settings for environment variables used by
 # bash_kit. The values of these settings can be overridden in your bash

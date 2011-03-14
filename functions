@@ -1,14 +1,160 @@
 #!/bin/sh
-##
-# Usage key:
-#   command <required> [optional]
-#
 
 ##
-# Add Alias.
+# Functions for bash kit.
 #
-# Add aliases that persist beyond the current session by appending them to the
-# file defained by the BASH_KIT_ALIASES variable.
+# This file contains various functions for making life on the command line a
+# little bit easier.
+
+##
+# Change directory using the name of a directory known to Drupal.
+#
+# This function utilizes drush's drupal-directory command to change directory
+# to the returned path. It used pushd instead of cd to collect a history of
+# visited directories.
+#
+# Usage:
+#   cdd <name>
+#
+# Examples:
+#   cdd devel           # Change to the devel module directory.
+#   cdd modules/custom  # Change to custom modules directory (e.g.,
+#                         sites/all/modules/custom).
+#   cdd                 # Change to the Drupal root directory.
+#
+function cdd() {
+  pushd `drush dd $@` > /dev/null
+}
+
+##
+# Silently keeps a history of all visited directories.
+#
+# This function remaps cd to instead use pushd to collect a history of visited
+# directories.
+#
+function cd () {
+  pushd "$@" > /dev/null
+}
+
+##
+# Step back through the visited directories history.
+#
+# Thus function provides a quick and easy way to retrace your steps back
+# through recently visited directories.
+#
+function pd () {
+  popd "$@" > /dev/null
+}
+
+##
+# Function for running a merge commit.
+#
+# It is common to merge one branch into another on a regular basis. This
+# function saves a bit of typing when doing such merged repeatedly.
+#
+# Usage:
+#   merged <branch>
+#
+# Example:
+#   merged trunk    # Runs, for example, bzr commit -m "Merged from trunk."
+#
+function merged() {
+  if [ $# -lt 1 ]; then
+    echo "usage: merged <branch>"
+    return
+  fi
+  $VC commit -m "Merged from $1"
+}
+
+##
+# Evaluate the type of Version Control System used for the current directory.
+#
+# This function was created to automatically switch version control systems
+# but if not currently being used for this purpose.
+#
+function vc_evaluate () {
+  if vc_is_git; then
+    echo "This is a git repo."
+    return
+  fi
+  if vc_is_bzr; then
+    echo "This is a bzr repo."
+    return
+  fi
+  if vc_is_svn; then
+    echo "This is an svn repo."
+    return
+  fi
+  if vc_is_cvs; then
+    echo "This is a cvs repo."
+    return
+  fi
+  echo "Cannot determine VCS. This directory does not seem to be under version control."
+}
+
+function vc_is_git () {
+  git branch &>/dev/null
+}
+
+function vc_is_bzr () {
+  bzr status &>/dev/null
+}
+
+function vc_is_svn () {
+  svn info &>/dev/null
+}
+
+function vc_is_cvs () {
+  ls CVS &>/dev/null
+}
+
+##
+# Clone a project from git.drupal.org.
+#
+function dclone () {
+  git clone "git://git.drupal.org/project/$1.git"
+}
+
+##
+# Create a new development site.
+#
+# Assumes a Drupal Developer profile skeleton makefile named dd.make in the
+# current directory.
+#
+function dd () {
+  MAKEFILE="${DRUSH_MAKEFILES}dd.make"
+  dmake $MAKEFILE $1
+  sql create drupal_$1
+}
+
+##
+# Run a makefile for a given target. Should be used internally.
+#
+function dmake() {
+  $drush make $1 $2
+}
+
+##
+# Open given module in the default editor.
+#
+function e () {
+  $EDITOR `drush dd $@`
+}
+
+##
+# Add aliases that persist beyond the current session.
+#
+# By appending aliases to the file specified by the BASH_KIT_ALIASES
+# environment variable, new aliases can persist beyond the current session.
+# This is helpful because usually aliases defined using the alias command are
+# disgarded at the end of the session and in some cases this is not what is
+# desired.
+#
+# Usage:
+#   aa <name> <command>
+#
+# Example:
+#   aa test date  # Maps the date command to be callable using test.
 #
 function aa () {
   if [ ! -f $BASH_KIT_ALIASES ]; then
@@ -32,8 +178,23 @@ function aa () {
 }
 
 ##
-# Simple recursive grep helper. Searches for <regexp pattern> recursively
-# within the current dir. Optionally, allows context.
+# Recursive text search command.
+#
+# This fuunction uses ack or grep (depending on what's available in your
+# system) to search the current directory recursively for a string represented
+# by a regular expression. Optionally, a third numeric argument can be passed
+# which specifies the context (how many lines before and after each match
+# should be displayed).
+#
+# Usage:
+#   g <regexp> [context]
+#
+# Example:
+#   g kittens         # Searched for kittens within the current directory and
+#                       below.
+#   g unicorns 10     # Searches for unicorns within the current directory and
+#                       below and print 10 lines either side of each match.
+#   dif | g ponies    # Searches the VCS diff for ponies.
 #
 function grepr () {
   if [ $# -lt 1 ]; then
@@ -81,202 +242,4 @@ function grepr () {
   fi
 
   $binary "$regexp" $options
-}
-
-##
-# Version Control System switcher.
-#
-# Usage:
-#   vc [vcs]
-#
-function vc () {
-  if [ $# == 1 ]; then
-    export VC=$1
-  fi
-  echo $VC
-}
-
-##
-# VCS agnostic add.
-#
-# Note: git add is completely different to bzr|cvs|svn add!
-#
-function add () {
-  if [ $# == 0 ]; then
-    echo "usage: add <file>"
-    return
-  fi
-  $VC add $1
-}
-
-##
-# VCS agnostic update.
-#
-function up () {
-  case $VC in
-    cvs )
-      cvs update -dP $*
-      ;;
-    git )
-      git pull origin master
-      ;;
-    * )
-      $VC update $*
-      ;;
-  esac
-}
-
-##
-# VCS agnostic commit with message.
-#
-function ci () {
-  if [ $# -lt 1 ]; then
-    echo "usage: ci <message>"
-    return
-  fi
-  message="$1"
-  shift 1
-  $VC commit -m "$message" $*
-  if [[ "$VC" == 'git'  && "$VC_AUTOPUSH" == 1 ]]; then
-    BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-    git push origin $BRANCH
-  fi
-}
-
-##
-# VCS agnostic diff.
-#
-# Usage:
-#   dif [args]
-#
-function dif () {
-  if [ $VC == 'cvs' ]; then
-    cvs diff $CVS_DIFF_OPTIONS
-  else
-    $VC diff $*
-  fi
-}
-
-##
-# VCS agnostic status.
-#
-# Usage:
-#   st [args]
-#
-function st () {
-  $VC status $*
-}
-
-##
-# VCS agnostic blame.
-#
-# Usage:
-#   blame [args]
-#
-function blame () {
-  if [ $VC == 'bzr' ]; then
-    $VC blame --all $*
-  else
-    $VC blame $*
-  fi
-}
-
-##
-# Drush drupal-directory helper.
-#
-function cdd() {
-  pushd `drush dd $@`> /dev/null
-}
-
-##
-# Remap cd to use pushd and supress output. This silently keeps a history of all directories.
-#
-function cd () {
-  pushd "$@" > /dev/null
-}
-
-##
-# Provides a quick and silent method for stepping back through the directory history.
-#
-function pd () {
-  popd "$@" > /dev/null
-}
-
-##
-# Command to run a merge commit.
-#
-function merged() {
-  if [ $# -lt 1 ]; then
-    echo "usage: merged <branch>"
-    return
-  fi
-  $VC commit -m "Merged from $1"
-}
-
-function vc_evaluate () {
-  if vc_is_git; then
-    echo "This is a git repo."
-    return
-  fi
-  if vc_is_bzr; then
-    echo "This is a bzr repo."
-    return
-  fi
-  if vc_is_svn; then
-    echo "This is an svn repo."
-    return
-  fi
-  if vc_is_cvs; then
-    echo "This is a cvs repo."
-    return
-  fi
-}
-
-function vc_is_git () {
-  git branch &>/dev/null
-}
-
-function vc_is_bzr () {
-  bzr status &>/dev/null
-}
-
-function vc_is_svn () {
-  svn info &>/dev/null
-}
-
-function vc_is_cvs () {
-  ls CVS &>/dev/null
-}
-
-##
-# Clone a project from git.drupal.org
-#
-function dclone () {
-  git clone "git://git.drupal.org/project/$1.git"
-}
-
-##
-# Create a new development site.
-#
-# Assumes a Drupal Developer profile skeleton makefile named dd.make in the
-# current directory.
-#
-function dd () {
-  MAKEFILE="${DRUSH_MAKEFILES}dd.make"
-  dmake $MAKEFILE $1
-  sql create drupal_$1
-}
-
-##
-# Run a makefile for a given target. Should be used internally.
-#
-function dmake() {
-  $drush make $1 $2
-}
-
-##
-# Open given module in the default editor.
-#
-function e () {
-  $EDITOR `drush dd $@`
 }

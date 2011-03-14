@@ -1,0 +1,158 @@
+#!/bin/sh
+
+##
+# Version Control System agnostic commands.
+#
+# Version control systems use differing syntax for similar commands. The
+# functions in this file attempt to standardize your workflow by allowing you
+# to use the same commands across all supported version control systems. Your
+# muscle memory will find it easier to repeat the same short commands, rather
+# than typing out the long versions. Examples:
+#
+# Original:
+#   git status
+# Becomes:
+#   st
+#
+# Original:
+#   git commit -m "Message"
+# Becomes:
+#   ci "Message"
+#
+# Original:
+#   git pull origin master
+# Becomes:
+#   up
+#
+# In addition to saving time by reducing typing, bash kit also contains history
+# search on on the up arrow key. For instance, typing c and then up will step
+# through all previously executed commands starting with the letter c. Removing
+# the version control system command prefix for your commands makes this even
+# more timesaving.
+#
+# To be able to remove the version control system prefix, bash kit needs to
+# know what version control system you intend your commands to run under. We do
+# this by setting an environment variable which can be switched using the vc
+# command. Instead of switching context in your head, let bash kit to the hard
+# work!
+
+##
+# Version Control System switcher.
+#
+# This function is used to switch the active version control system.
+#
+# Usage:
+#   vc [vcs]
+#
+# Examples:
+#   vc bzr  # Switches the current VCS to bzr.
+#   vc      # Returms the current VCS.
+#
+function vc () {
+  if [ $# == 1 ]; then
+    export VC=$1
+  fi
+  echo $VC
+}
+
+##
+# Version Control System agnostic add.
+#
+# Note: git add is completely different to bzr|cvs|svn add!
+#
+function add () {
+  if [ $# == 0 ]; then
+    echo "usage: add <file>"
+    return
+  fi
+  $VC add $1
+}
+
+##
+# Version Control System agnostic update.
+#
+function up () {
+  case $VC in
+    cvs )
+      cvs update -dP $*
+      ;;
+    git )
+      git pull origin master
+      ;;
+    * )
+      $VC update $*
+      ;;
+  esac
+}
+
+##
+# Version Control System agnostic commit.
+#
+# Usage:
+#   ci <message>
+# Example:
+#   ci "Initial commit."
+#
+# When using git there is an extra option to automatically push the changes to
+# the central server for each commit. This is helpful when working in a fast
+# moving team environment where others depend on getting your commits as
+# quickly as possible.
+#
+function ci () {
+  if [ $# -lt 1 ]; then
+    echo "usage: ci <message>"
+    return
+  fi
+  message="$1"
+  shift 1
+  $VC commit -m "$message" $*
+  if [[ "$VC" == 'git'  && "$VC_AUTOPUSH" == 1 ]]; then
+    BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+    git push origin $BRANCH
+  fi
+}
+
+##
+# Version Control System agnostic diff.
+#
+# Usage:
+#   dif [args]
+#
+# Examples:
+#   dif           # Runs a VCS diff on the current repo.
+#   dif .         # Runs a VCS diff on the current directory.
+#   dif file.ext  # Runs a VCS diff on a specific file.
+#
+# Any arguments specified are passed directly to the current VCS.
+#
+function dif () {
+  if [ $VC == 'cvs' ]; then
+    cvs diff $CVS_DIFF_OPTIONS
+  else
+    $VC diff $*
+  fi
+}
+
+##
+# Version Control System agnostic status.
+#
+# Usage:
+#   st [args]
+#
+function st () {
+  $VC status $*
+}
+
+##
+# Version Control System agnostic blame.
+#
+# Usage:
+#   blame [args]
+#
+function blame () {
+  if [ $VC == 'bzr' ]; then
+    $VC blame --all $*
+  else
+    $VC blame $*
+  fi
+}

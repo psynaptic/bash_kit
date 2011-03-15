@@ -181,3 +181,12 @@ function grepr () {
 
   $binary "$regexp" $options
 }
+
+function count_changes () {
+  stdin=`cat /dev/stdin`;
+  altered=`echo "$stdin" | grep ^[+-][^+-] | wc -l`;
+  removed=`echo "$stdin" | grep "^-[^-]" | wc -l`;
+  added=`echo "$stdin" | grep "^+[^+]" | wc -l`;
+
+  echo $altered altered: $removed removed, $added added.
+}

@@ -69,7 +69,7 @@ function dd () {
 # Run a makefile for a given target. Should be used internally.
 #
 function dmake() {
-  $drush make $1 $2
+  drush make $1 $2
 }
 
 ##

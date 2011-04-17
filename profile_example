@@ -4,6 +4,7 @@ export BASH_PROFILE="$HOME/.bash_profile"
 export DRUSH_PATH="/opt/local/drush"
 export DB_USER="root"
 export DB_PASS=""
+export PATH=$DRUSH_PATH:$PATH
 
 # Import bash_kit
 if [ "$BASH" -o "$ZSH" ]; then

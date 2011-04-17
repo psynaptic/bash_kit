@@ -38,7 +38,6 @@ alias praise="blame"
 alias dif-count="dif | count_changes"
 
 # Drush
-alias drush="$DRUSH_PATH/drush"
 alias cc='drush cc all'
 alias cct='drush cc theme'
 alias f='drush features'

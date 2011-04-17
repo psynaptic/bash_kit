@@ -107,7 +107,7 @@ function aa () {
   alias="alias $command='$@'"
   read -p "Add alias: $alias?"
   printf "$alias\n" >> $BASH_KIT_ALIASES
-  if [[ $# ]]; then
+  if [ $# ]; then
     echo "Alias added"
     source $BASH_KIT_ALIASES
     else
@@ -143,23 +143,19 @@ function grepr () {
   # Store the search string so we can manipulate it.
   local regexp=$1
 
-  # Automatically escape certain characters.
-  regexp="${regexp//(/\(}"
-  regexp="${regexp//)/\)}"
-
   # Figure out if ack is available and if so use it.
   local binary=grep
   which ack > /dev/null 2>&1
-  if [ $? == "0" ]; then
+  if [ $? -eq 0 ]; then
     binary=ack
   fi
   which ack-grep > /dev/null 2>&1
-  if [ $? == "0" ]; then
+  if [ $? -eq 0 ]; then
     binary=ack-grep
   fi
 
   # Things required for grep.
-  if [ $binary == 'grep' ]; then
+  if [ '$binary' '==' 'grep' ]; then
     # grep needs spaces escaping.
     regexp="${regexp// /\W}"
     local options=$GREP_OPTIONS
@@ -170,12 +166,8 @@ function grepr () {
     local options=$ACK_OPTIONS
   fi
 
-  # Both grep and ack need brackets escaping.
-  regexp="${regexp//(/\(}"
-  regexp="${regexp//)/\)}"
-
   # If 3 parameters are passed, add the context option.
-  if [ $# == 2 ]; then
+  if [ $# -eq 2 ]; then
     options="$options --context=$2"
   fi
 
@@ -183,10 +175,11 @@ function grepr () {
 }
 
 function count_changes () {
-  stdin=`cat /dev/stdin`;
-  altered=`echo "$stdin" | grep ^[+-][^+-] | wc -l`;
-  removed=`echo "$stdin" | grep "^-[^-]" | wc -l`;
-  added=`echo "$stdin" | grep "^+[^+]" | wc -l`;
+  stdin=$(cat /dev/stdin);
+  lines=$(echo "$stdin" | wc -l);
+  changes=$(echo "$stdin" | grep "^[+-][^+-]" | wc -l);
+  removed=$(echo "$stdin" | grep "^-[^-]" | wc -l);
+  added=$(echo "$stdin" | grep "^+[^+]" | wc -l);
 
-  echo $altered altered: $removed removed, $added added.
+  echo total $lines lines. $changes altered: $removed removed, $added added.
 }

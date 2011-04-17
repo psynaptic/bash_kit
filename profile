@@ -30,12 +30,19 @@ if [ -f "$BASH_KIT_DIR/colours" ]; then
   . "$BASH_KIT_DIR/colours"
 fi
 
-# Command prompt
-PS1="\[$text_blue\]\u@\h: \w\[$reset\]\[$bold_blue\]>\[$reset\] "
+if [ "$BASH" ]; then
+  # Command prompt
+  PS1="\[$text_blue\]\u@\h: \w\[$reset\]\[$bold_blue\]>\[$reset\] "
 
-# Make bash autocomplete with up arrow
-bind '"\e[A":history-search-backward'
-bind '"\e[B":history-search-forward'
+  # Make bash autocomplete with up arrow
+  bind '"\e[A":history-search-backward'
+  bind '"\e[B":history-search-forward'
 
-# Make cd try only directories
-complete -d cd
+  # Make cd try only directories
+  complete -d cd
+fi
+
+if [ "$ZSH" ]; then
+  bindkey '\e[A' history-search-backward
+  bindkey '\e[B' history-search-forward
+fi

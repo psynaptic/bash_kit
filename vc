@@ -49,7 +49,7 @@
 #   vc      # Returms the current VCS.
 #
 function vc () {
-  if [ $# == 1 ]; then
+  if [ $# -eq 1 ]; then
     export VC=$1
   fi
   echo $VC
@@ -61,7 +61,7 @@ function vc () {
 # Note: git add is completely different to bzr|cvs|svn add!
 #
 function add () {
-  if [ $# == 0 ]; then
+  if [ $# -eq 0 ]; then
     echo "usage: add <file>"
     return
   fi
@@ -106,7 +106,7 @@ function ci () {
   message="$1"
   shift 1
   $VC commit -m "$message" $*
-  if [[ "$VC" == 'git'  && "$VC_AUTOPUSH" == 1 ]]; then
+  if [[ "$VC" == 'git'  && "$VC_AUTOPUSH" -eq 1 ]]; then
     BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
     git push origin $BRANCH
   fi
@@ -126,7 +126,7 @@ function ci () {
 # Any arguments specified are passed directly to the current VCS.
 #
 function dif () {
-  if [ $VC == 'cvs' ]; then
+  if [ '$VC' '==' 'cvs' ]; then
     cvs diff $CVS_DIFF_OPTIONS
   else
     $VC diff $*
@@ -150,7 +150,7 @@ function st () {
 #   blame [args]
 #
 function blame () {
-  if [ $VC == 'bzr' ]; then
+  if [ '$VC' '==' 'bzr' ]; then
     $VC blame --all $*
   else
     $VC blame $*

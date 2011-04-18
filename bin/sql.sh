@@ -95,6 +95,13 @@ function sql_clone_table {
   $MYSQL $mysql_auth $MYSQL_OPTIONS -D $1 -e "INSERT INTO $target SELECT * FROM $source";
 }
 
+function sql_drop_table {
+  database=$1
+  table=$2
+  echo "Dropping table $table from $database...";
+  $MYSQL $mysql_auth $MYSQL_OPTIONS -D $1 -e "DROP TABLE IF EXISTS $table";
+}
+
 case $mode in
 
   check)
@@ -134,6 +141,10 @@ case $mode in
 
   clone-table)
     sql_clone_table $database "$3" "$4"
+  ;;
+
+  drop-table)
+    sql_drop_table $database "$3"
   ;;
 
 dump)
@@ -208,18 +219,19 @@ exit
     else # if no option was recognised show usage information
       echo "usage: sql command [database] [table]"
       echo "examples:"
-      echo "  sql                       - login to mysql"
-      echo "  sql show                  - show databases"
-      echo "  sql use database          - login and use database"
-      echo "  sql dump database         - dump database"
-      echo "  sql dump database table   - dump a table from database"
-      echo "  sql import database       - import database"
-      echo "  sql import database table - import table to database"
-      echo "  sql create database       - create database"
-      echo "  sql recreate database     - drop and create a database"
-      echo "  sql drop database         - drop database"
-      echo "  sql execute <database> <command> - execute an sql query on the database"
-      echo "  sql clone-table <database> <source> <target> - clone source database table to target"
+      echo "  sql                                             - login to mysql"
+      echo "  sql show                                        - show databases"
+      echo "  sql use <database>                              - login and use database"
+      echo "  sql dump <database>                             - dump database"
+      echo "  sql dump <database> <table>                     - dump a table from database"
+      echo "  sql import <database>                           - import database"
+      echo "  sql import <database> <table>                   - import table to database"
+      echo "  sql create <database>                           - create database"
+      echo "  sql recreate <database>                         - drop and create a database"
+      echo "  sql drop <database>                             - drop database"
+      echo "  sql drop-table <database> <table>               - drop table from database"
+      echo "  sql execute <database> <command>                - execute an sql query on the database"
+      echo "  sql clone-table <database> <source> <target>    - clone source database table to target"
   fi
 ;;
 

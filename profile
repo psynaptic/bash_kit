@@ -43,6 +43,8 @@ if [ "$BASH" ]; then
 fi
 
 if [ "$ZSH" ]; then
-  bindkey '\e[A' history-search-backward
-  bindkey '\e[B' history-search-forward
+  bindkey '\e[A' history-beginning-search-backward
+  bindkey '\e[B' history-beginning-search-forward
+  bindkey '\e.' insert-last-word
 fi
+

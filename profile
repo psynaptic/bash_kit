@@ -47,4 +47,3 @@ if [ "$ZSH" ]; then
   bindkey '\e[B' history-beginning-search-forward
   bindkey '\e.' insert-last-word
 fi
-

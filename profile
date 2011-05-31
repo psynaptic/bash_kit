@@ -30,20 +30,16 @@ if [ -f "$BASH_KIT_DIR/colours" ]; then
   . "$BASH_KIT_DIR/colours"
 fi
 
+# Import configuration for the active shell.
+
 if [ "$BASH" ]; then
-  # Command prompt
-  PS1="\[$text_blue\]\u@\h: \w\[$reset\]\[$bold_blue\]>\[$reset\] "
-
-  # Make bash autocomplete with up arrow
-  bind '"\e[A":history-search-backward'
-  bind '"\e[B":history-search-forward'
-
-  # Make cd try only directories
-  complete -d cd
+  if [ -f "$BASH_KIT_DIR/shells/bash" ]; then
+    . "$BASH_KIT_DIR/shells/bash"
+  fi
 fi
 
 if [ "$ZSH" ]; then
-  bindkey '\e[A' history-beginning-search-backward
-  bindkey '\e[B' history-beginning-search-forward
-  bindkey '\e.' insert-last-word
+  if [ -f "$BASH_KIT_DIR/shells/zsh" ]; then
+    . "$BASH_KIT_DIR/shells/zsh"
+  fi
 fi

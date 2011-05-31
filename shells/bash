@@ -1,0 +1,13 @@
+##
+# Configuration for bash.
+#
+
+# Command prompt
+PS1="\[$text_blue\]\u@\h: \w\[$reset\]\[$bold_blue\]>\[$reset\] "
+
+# Make bash autocomplete with up arrow
+bind '"\e[A":history-search-backward'
+bind '"\e[B":history-search-forward'
+
+# Make cd try only directories
+complete -d cd

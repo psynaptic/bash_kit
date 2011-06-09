@@ -169,7 +169,7 @@ function blame () {
 # Example:
 #   merged trunk    # Runs, for example, bzr commit -m "Merged from trunk."
 #
-function merged() {
+function merged () {
   if [ $# -lt 1 ]; then
     echo "usage: merged <branch>"
     return

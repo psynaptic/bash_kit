@@ -185,6 +185,13 @@ function log () {
 }
 
 ##
+# VCS agnositic tag.
+#
+function tag () {
+  $VC tag
+}
+
+##
 # Evaluate the type of Version Control System used for the current directory.
 #
 # This function was created to automatically switch version control systems

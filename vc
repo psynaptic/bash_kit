@@ -178,6 +178,13 @@ function merged () {
 }
 
 ##
+# Displays the commit log.
+#
+function log () {
+  $VC log
+}
+
+##
 # Evaluate the type of Version Control System used for the current directory.
 #
 # This function was created to automatically switch version control systems

@@ -115,65 +115,6 @@ function aa () {
   fi
 }
 
-##
-# Recursive text search command.
-#
-# This fuunction uses ack or grep (depending on what's available in your
-# system) to search the current directory recursively for a string represented
-# by a regular expression. Optionally, a third numeric argument can be passed
-# which specifies the context (how many lines before and after each match
-# should be displayed).
-#
-# Usage:
-#   g <regexp> [context]
-#
-# Example:
-#   g kittens         # Searched for kittens within the current directory and
-#                       below.
-#   g unicorns 10     # Searches for unicorns within the current directory and
-#                       below and print 10 lines either side of each match.
-#   dif | g ponies    # Searches the VCS diff for ponies.
-#
-function grepr () {
-  if [ $# -lt 1 ]; then
-    echo "usage: grepr <regexp> [context]"
-    return
-  fi
-
-  # Store the search string so we can manipulate it.
-  local regexp=$1
-
-  # Figure out if ack is available and if so use it.
-  local binary=grep
-  which ack > /dev/null 2>&1
-  if [ $? -eq 0 ]; then
-    binary=ack
-  fi
-  which ack-grep > /dev/null 2>&1
-  if [ $? -eq 0 ]; then
-    binary=ack-grep
-  fi
-
-  # Things required for grep.
-  if [ '$binary' '==' 'grep' ]; then
-    # grep needs spaces escaping.
-    regexp="${regexp// /\W}"
-    local options=$GREP_OPTIONS
-  fi
-
-  # Things required for ack.
-  if [[ $binary == 'ack' || $binary == 'ack-grep' ]]; then
-    local options=$ACK_OPTIONS
-  fi
-
-  # If 3 parameters are passed, add the context option.
-  if [ $# -eq 2 ]; then
-    options="$options --context=$2"
-  fi
-
-  $binary "$regexp" $options
-}
-
 function count_changes () {
   stdin=$(cat /dev/stdin);
   lines=$(echo "$stdin" | wc -l);

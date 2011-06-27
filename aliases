@@ -19,7 +19,7 @@ alias grep="grep $GREP_OPTIONS"
 alias df="df -h"
 alias c="clear"
 alias h="history"
-alias g="grepr"
+alias g="ack"
 alias v="vim"
 
 # git

@@ -29,7 +29,7 @@ alias gau='add -u'
 alias pull='git pull'
 alias push='git push'
 alias gpom='git push origin master'
-alias git-color='git config color.ui true'
+alias git-color='git config --global color.ui true'
 alias switch-origin='git remote rm origin; git remote add origin'
 alias difc='dif --cached'
 

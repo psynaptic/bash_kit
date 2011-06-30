@@ -73,6 +73,10 @@ function sql_execute {
   $MYSQL $mysql_auth $MYSQL_OPTIONS -D $1 -e "$2"
 }
 
+function sql_explain() {
+  $MYSQL $mysql_auth $MYSQL_OPTIONS -D $1 -e "explain $2"
+}
+
 function sql_check {
   SCHEMA=`$MYSQL $mysql_auth $MYSQL_OPTIONS -e "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$1'"`;
   if [ -z "$SCHEMA" ]; then
@@ -145,6 +149,10 @@ case $mode in
 
   drop-table)
     sql_drop_table $database "$3"
+  ;;
+
+  explain)
+    sql_explain $database "$3"
   ;;
 
 dump)

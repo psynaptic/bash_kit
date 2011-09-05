@@ -37,6 +37,7 @@ alias co='git checkout'
 alias branch='git checkout -b'
 alias stash='git stash'
 alias unstash='git stash apply'
+alias show='git show'
 
 # VCS
 alias praise="blame"

@@ -35,6 +35,8 @@ alias difc='dif --cached'
 alias clone='git clone'
 alias co='git checkout'
 alias branch='git checkout -b'
+alias stash='git stash'
+alias unstash='git stash apply'
 
 # VCS
 alias praise="blame"

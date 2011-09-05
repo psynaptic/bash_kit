@@ -39,6 +39,10 @@ alias stash='git stash'
 alias unstash='git stash apply'
 alias show='git show'
 
+# bzr
+alias unshelve='bzr unshelve'
+alias shelve='bzr shelve'
+
 # VCS
 alias praise="blame"
 alias dif-count="dif | count_changes"

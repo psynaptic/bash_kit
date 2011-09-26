@@ -35,7 +35,7 @@ alias difc='dif --cached'
 alias clone='git clone'
 alias co='git checkout'
 alias branch='git checkout -b'
-alias stash='git stash'
+alias stash='git stash save'
 alias unstash='git stash apply'
 alias show='git show'
 

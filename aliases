@@ -37,6 +37,7 @@ alias co='git checkout'
 alias branch='git checkout -b'
 alias stash='git stash save'
 alias unstash='git stash apply'
+alias list='git stash list'
 alias show='git show'
 
 # bzr

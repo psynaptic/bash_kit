@@ -19,7 +19,6 @@ export CVS_DIFF_OPTIONS="${CVS_DIFF_OPTIONS:--up}"
 
 # Shell utilities
 export EDITOR="${EDITOR:-vim}"
-export LS_OPTIONS="${LS_OPTIONS:--G}"
 export GREP_OPTIONS="${GREP_OPTIONS:---color -n}"
 export ACK_OPTIONS="${ACK_OPTIONS:--a}"
 

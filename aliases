@@ -7,7 +7,7 @@ alias ip="printf 'Your IP Address is: '; curl http://icanhazip.com/"
 
 # ls
 alias l="ls"
-alias ll="ls $LS_OPTIONS -Flh"
+alias ll="ls $LS_OPTIONS -lh"
 alias la="ls $LS_OPTIONS -a"
 alias lla="ls $LS_OPTIONS -la"
 alias lt="ls $LS_OPTIONS -lt"

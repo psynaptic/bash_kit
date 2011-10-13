@@ -39,6 +39,7 @@ alias stash='git stash save'
 alias unstash='git stash apply'
 alias list='git stash list'
 alias show='git show'
+alias reset='git reset'
 
 # bzr
 alias unshelve='bzr unshelve'

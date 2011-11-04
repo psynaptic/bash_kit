@@ -106,7 +106,7 @@ function ci () {
   message="$1"
   shift 1
   $VC commit -m "$message" $*
-  if [[ $VC -eq 'git' && $VC_AUTOPUSH -eq 1 ]]; then
+  if [[ $VC == 'git' && $VC_AUTOPUSH -eq 1 ]]; then
     BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
     git push origin $BRANCH
   fi
@@ -126,7 +126,7 @@ function ci () {
 # Any arguments specified are passed directly to the current VCS.
 #
 function dif () {
-  if [[ $VC -eq 'cvs' ]]; then
+  if [[ $VC == 'cvs' ]]; then
     cvs diff $CVS_DIFF_OPTIONS
   else
     $VC diff $*
@@ -150,7 +150,7 @@ function st () {
 #   blame [args]
 #
 function blame () {
-  if [[ $VC -eq 'bzr' ]]; then
+  if [[ $VC == 'bzr' ]]; then
     $VC blame --all $*
   else
     $VC blame $*
@@ -181,7 +181,7 @@ function merged () {
 # Displays the commit log.
 #
 function log () {
-  if [[ $VC -eq 'git' ]]; then
+  if [[ $VC == 'git' ]]; then
     $VC log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   else
     $VC log

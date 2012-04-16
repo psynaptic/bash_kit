@@ -33,7 +33,11 @@ function cdd() {
 # directories.
 #
 function cd () {
-  pushd "$@" > /dev/null
+  if [[ -z "$1" ]]; then
+    builtin cd
+  else
+    pushd "$@" > /dev/null
+  fi
 }
 
 ##

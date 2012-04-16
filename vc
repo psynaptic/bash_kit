@@ -236,3 +236,12 @@ function vc_is_svn () {
 function vc_is_cvs () {
   ls CVS &>/dev/null
 }
+
+##
+# Push to origin <current branch>.
+#
+function push () {
+  BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+  git push origin $BRANCH
+}
+

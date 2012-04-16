@@ -238,6 +238,32 @@ function vc_is_cvs () {
 }
 
 ##
+# Commit using Drupal's standard message format.
+#
+# Example: "Issue #1234 by username: Messsage."
+#
+function cit () {
+  if [[ -z "$1" ]]; then
+    echo "usage: cit <message>"
+  fi
+  GIT_USER=$(git config github.user)
+  TICKET=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e "s/* $BRANCH_NAME_PREFIX\(.*\)/\1/" | tr '[a-z]' '[A-Z]')
+  ci "Issue $TICKET_PREFIX$TICKET by $GIT_USER: $1"
+}
+
+##
+# Checkout a branch in the form ticket-1234.
+#
+function cot () {
+  if [[ -z "$1" ]]; then
+    echo "usage: cot EX-123"
+    return
+  fi
+  TICKET=$(echo $1 | tr '[A-Z]' '[a-z]')
+  git checkout $BRANCH_NAME_PREFIX$TICKET
+}
+
+##
 # Push to origin <current branch>.
 #
 function push () {

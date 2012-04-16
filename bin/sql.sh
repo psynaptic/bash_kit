@@ -94,9 +94,8 @@ function sql_create {
 function sql_clone_table {
   source=$2
   target=$3
-  echo "Cloning table $source to $target...";
-  $MYSQL $mysql_auth $MYSQL_OPTIONS -D $1 -e "CREATE TABLE $target LIKE $source";
-  $MYSQL $mysql_auth $MYSQL_OPTIONS -D $1 -e "INSERT INTO $target SELECT * FROM $source";
+  $MYSQL $mysql_auth $MYSQL_OPTIONS -D $1 -e "CREATE TABLE IF NOT EXISTS $target LIKE $source";
+  $MYSQL $mysql_auth $MYSQL_OPTIONS -D $1 -e "INSERT IGNORE INTO $target SELECT * FROM $source";
 }
 
 function sql_drop_table {

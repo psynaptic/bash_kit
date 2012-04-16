@@ -128,3 +128,8 @@ function count_changes () {
 
   echo total $lines lines. $changes altered: $removed removed, $added added.
 }
+
+function vo () {
+  v +/$1 $(g $1 -l);
+}
+

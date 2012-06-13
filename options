@@ -16,6 +16,7 @@ export BASH_KIT_ALIASES="${BASH_KIT_ALIASES:-$HOME/.bash_aliases}"
 export VC="${VC:-git}"
 export VC_AUTOPUSH="${VC_AUTOPUSH:-1}"
 export CVS_DIFF_OPTIONS="${CVS_DIFF_OPTIONS:--up}"
+export TICKET_PREFIX="${TICKET_PREFIX:-#}"
 
 # Shell utilities
 export EDITOR="${EDITOR:-vim}"

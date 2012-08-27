@@ -181,11 +181,7 @@ function merged () {
 # Displays the commit log.
 #
 function log () {
-  if [[ $VC == 'git' ]]; then
-    $VC log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-  else
-    $VC log
-  fi
+  $VC log
 }
 
 ##

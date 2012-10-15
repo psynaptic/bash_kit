@@ -7,6 +7,20 @@
 # little bit easier.
 
 ##
+# Override Ack to use the short program name.
+#
+# Ack can appear with different program binary names. On Ubuntu the "ack"
+# namespace is already taken by another package; on OS X the program is called
+# "ack" as expected.
+function ack () {
+  if [ -x $(which ack-grep) ]; then
+    $(which ack-grep) $@
+  elif [ -x $(which ack) ]; then
+    $(which ack) $@
+  fi
+}
+
+##
 # Change directory using the name of a directory known to Drupal.
 #
 # This function utilizes drush's drupal-directory command to change directory

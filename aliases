@@ -6,13 +6,14 @@ alias bk="cd $BASH_KIT_DIR"
 alias ip="printf 'Your IP Address is: '; curl http://icanhazip.com/"
 
 # ls
-alias l="ls"
+alias ls="ls $LS_OPTIONS"
+alias l="ls $LS_OPTIONS"
 alias ll="ls $LS_OPTIONS -lh"
 alias la="ls $LS_OPTIONS -a"
 alias lla="ls $LS_OPTIONS -la"
 alias lt="ls $LS_OPTIONS -lt"
 alias ld="ls $LS_OPTIONS -h */"
-alias lc="ls -1 | wc -l"
+alias lc="ls $LS_OPTIONS -1 | wc -l"
 
 # Remappings
 alias grep="grep $GREP_OPTIONS"

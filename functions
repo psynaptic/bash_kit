@@ -58,18 +58,6 @@ function dclone () {
 }
 
 ##
-# Create a new development site.
-#
-# Assumes a Drupal Developer profile skeleton makefile named dd.make in the
-# current directory.
-#
-function dd () {
-  MAKEFILE="${DRUSH_MAKEFILES}dd.make"
-  dmake $MAKEFILE $1
-  sql create drupal_$1
-}
-
-##
 # Run a makefile for a given target. Should be used internally.
 #
 function dmake() {

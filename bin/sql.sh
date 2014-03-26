@@ -201,9 +201,6 @@ fi
 
 import)
 
-sql_drop $database
-sql_create $database
-
 file=$3
 # If the file ends with .gz it is probably a gzipped dump.
 if [[ ${file: -3} == ".gz" ]]

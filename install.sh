@@ -1,8 +1,6 @@
 set -e
 
-if [[ -z $BASH_KIT_DIR ]]; then
-  export BASH_KIT_DIR=~/.kit
-fi
+BASH_KIT_DIR=~/.kit
 
 if [[ -d $BASH_KIT_DIR ]]; then
   echo "\033[0;31mBash Kit is already installed. Please remove $BASH_KIT_DIR if you want to re-install.\033[0m"

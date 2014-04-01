@@ -2,7 +2,7 @@ set -e
 
 BASH_KIT_DIR=~/.kit
 
-if [[ -d $BASH_KIT_DIR ]]; then
+if [ -d $BASH_KIT_DIR ]; then
   echo "\033[0;31mBash Kit is already installed. Please remove $BASH_KIT_DIR if you want to re-install.\033[0m"
   exit 1
 fi
@@ -28,7 +28,7 @@ export BASH_PROFILE=$PROFILE
 export BASH_KIT_DIR=$BASH_KIT_DIR
 
 if [ -d \$BASH_KIT_DIR ]; then
-  if [ \$BASH -o \$ZSH ]; then
+  if [ "\$BASH" -o "\$ZSH" ]; then
     if [ -f $BASH_KIT_DIR/profile ]; then
       . $BASH_KIT_DIR/profile
     fi

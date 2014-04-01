@@ -23,14 +23,11 @@ elif [ -f "$HOME/.bashrc" ]; then
   BASH_PROFILE=".bashrc"
 fi
 
-ZSH_PROFILE=".zshrc"
-echo "export ZSH=$(which zsh)" > "$HOME/$ZSH_PROFILE"
-
 PROFILES="$BASH_PROFILE|$ZSH_PROFILE"
 IFS='|'
 for file in $(echo "$PROFILES"); do
   cat << EOF >> $HOME/$file
-
+# Import bash_kit for bash and zsh login shells.
 export BASH_KIT_DIR="\$HOME/$BASH_KIT_DIR"
 if [ -d "\$BASH_KIT_DIR" ]; then
   if [ "\$BASH" -o "\$ZSH" ]; then

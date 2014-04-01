@@ -1,6 +1,4 @@
 # Shortcuts
-alias r="source $BASH_PROFILE"
-alias p="$EDITOR $BASH_PROFILE"
 alias a="$EDITOR $BASH_KIT_ALIASES"
 alias ip="printf 'Your IP Address is: '; curl http://icanhazip.com/"
 

@@ -16,21 +16,22 @@ git clone https://github.com/psynaptic/bash_kit.git "$BASH_KIT_INSTALL"
 
 # Calculate the bash profile file location.
 if [ -f "$HOME/.profile" ]; then
-  PROFILE=".profile"
+  BASH_PROFILE=".profile"
 elif [ -f "$HOME/.bash_profile" ]; then
-  PROFILE=".bash_profile"
+  BASH_PROFILE=".bash_profile"
 elif [ -f "$HOME/.bashrc" ]; then
-  PROFILE=".bashrc"
+  BASH_PROFILE=".bashrc"
 fi
 
-PROFILES="$PROFILE|.zshrc"
+ZSH_PROFILE=".zshrc"
+echo "export ZSH=$(which zsh)" > "$HOME/$ZSH_PROFILE"
+
+PROFILES="$BASH_PROFILE|$ZSH_PROFILE"
 IFS='|'
 for file in $(echo "$PROFILES"); do
   cat << EOF >> $HOME/$file
 
-export BASH_PROFILE="\$HOME/$PROFILE"
 export BASH_KIT_DIR="\$HOME/$BASH_KIT_DIR"
-
 if [ -d "\$BASH_KIT_DIR" ]; then
   if [ "\$BASH" -o "\$ZSH" ]; then
     if [ -f "\$HOME/$BASH_KIT_DIR/profile" ]; then

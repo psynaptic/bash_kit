@@ -23,7 +23,10 @@ elif [ -f "$HOME/.bashrc" ]; then
   PROFILE=".bashrc"
 fi
 
-cat << EOF >> "$HOME/$PROFILE"
+PROFILES="$PROFILE|.zshrc"
+IFS='|'
+for file in $(echo "$PROFILES"); do
+  cat << EOF >> $HOME/$file
 
 export BASH_PROFILE="\$HOME/$PROFILE"
 export BASH_KIT_DIR="\$HOME/$BASH_KIT_DIR"
@@ -37,6 +40,8 @@ if [ -d "\$BASH_KIT_DIR" ]; then
 fi
 
 EOF
+done
+unset IFS
 
 echo "\033[0;35mTo complete the installation run the following command:\nsource $HOME/$PROFILE\033[0m"
 

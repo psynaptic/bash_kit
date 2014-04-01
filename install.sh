@@ -44,6 +44,6 @@ EOF
 done
 unset IFS
 
-echo "\033[0;35mTo complete the installation run the following command:\nsource $HOME/$PROFILE\033[0m"
+echo "\033[0;35mTo complete the installation run the following command:\nsource $HOME/$BASH_PROFILE\033[0m"
 
 echo "\033[0;32mDone\033[0m"

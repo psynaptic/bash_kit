@@ -22,6 +22,7 @@ elif [ -f "$HOME/.bash_profile" ]; then
 elif [ -f "$HOME/.bashrc" ]; then
   BASH_PROFILE=".bashrc"
 fi
+ZSH_PROFILE=".zshrc"
 
 PROFILES="$BASH_PROFILE|$ZSH_PROFILE"
 IFS='|'

@@ -9,12 +9,11 @@
 #
 
 # Bash kit
-export BASH_PROFILE="${BASH_PROFILE:-$HOME/.bash_profile}"
 export BASH_KIT_ALIASES="${BASH_KIT_ALIASES:-$HOME/.bash_aliases}"
 
 # Version control
 export VC="${VC:-git}"
-export VC_AUTOPUSH="${VC_AUTOPUSH:-1}"
+export VC_AUTOPUSH="${VC_AUTOPUSH:-0}"
 export CVS_DIFF_OPTIONS="${CVS_DIFF_OPTIONS:--up}"
 export TICKET_PREFIX="${TICKET_PREFIX:-#}"
 
@@ -24,6 +23,8 @@ export GREP_OPTIONS="${GREP_OPTIONS:---color -n}"
 export ACK_OPTIONS="${ACK_OPTIONS:--a}"
 
 # MySQL
+export DB_USER="${DB_USER:-root}"
+export DB_PASS="${DB_PASS:-}"
 export MYSQL="${MYSQL:-mysql}"
 export MYSQLADMIN="${MYSQLADMIN:-mysqladmin}"
 export MYSQLDUMP="${MYSQLDUMP:-mysqldump}"

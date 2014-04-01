@@ -1,7 +1,19 @@
-#!/usr/bin/env bash
+set -e
 
-# Get the directory of this script.
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ -z $BASH_KIT_DIR ]]; then
+  export BASH_KIT_DIR=~/.kit
+fi
+
+if [[ -d $BASH_KIT_DIR ]]; then
+  echo "\033[0;31mBash Kit is already installed. Please remove $BASH_KIT_DIR if you want to re-install.\033[0m"
+  exit 1
+fi
+
+echo "\033[0;33mInstalling Bash Kit...\033[0m"
+hash git &>/dev/null || {
+  echo "\033[0;31mgit not installed\033[0m"
+}
+git clone https://github.com/psynaptic/bash_kit.git $BASH_KIT_DIR
 
 # Calculate the bash profile file location.
 if [ -f "$HOME/.profile" ]; then
@@ -14,28 +26,20 @@ fi
 
 cat << EOF >> $PROFILE
 
-# Set the Bash Kit environment variables.
-export BASH_KIT_DIR="$DIR"
-export BASH_PROFILE="$PROFILE"
-export DRUSH_PATH="$(which drush)"
-export DB_USER="root"
-export DB_PASS=""
-export PATH=\$DRUSH_PATH:\$PATH
-export VC_AUTOPUSH=0
+export BASH_PROFILE=$PROFILE
+export BASH_KIT_DIR=$BASH_KIT_DIR
 
-# Import bash_kit
-if [ "\$BASH" -o "\$ZSH" ]; then
-  if [ -f "$DIR/profile" ]; then
-    . "$DIR/profile"
+if [ -d \$BASH_KIT_DIR ]; then
+  if [ \$BASH -o \$ZSH ]; then
+    if [ -f $BASH_KIT_DIR/profile ]; then
+      . $BASH_KIT_DIR/profile
+    fi
   fi
 fi
 
 EOF
 
-cat << EOF
-Run the following command to complete the installation of Bash Kit:
+echo "\033[0;33mSourcing $PROFILE\033[0m"
+. $PROFILE
 
-source $PROFILE
-EOF
-
-
+echo "\033[0;32mDone\033[0m"

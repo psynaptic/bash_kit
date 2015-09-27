@@ -12,7 +12,7 @@ echo "\033[0;33mInstalling Bash Kit...\033[0m"
 hash git &>/dev/null || {
   echo "\033[0;31mgit not installed\033[0m"
 }
-git clone https://github.com/psynaptic/bash_kit.git "$BASH_KIT_INSTALL"
+git clone git@github.com:psynaptic/bash_kit.git "$BASH_KIT_INSTALL"
 
 # Calculate the bash profile file location.
 if [ -f "$HOME/.profile" ]; then

@@ -3,7 +3,7 @@
 #
 
 # Command prompt
-PS1="\[$text_green\]\u@\h:\w $\[$reset\] "
+PS1="\n\[$text_green\]\u@\h:\w\n$\[$reset\] "
 
 # Make bash autocomplete with up arrow
 case "$TERM" in

@@ -6,8 +6,12 @@
 PS1="\[$text_green\]\u@\h:\w $\[$reset\] "
 
 # Make bash autocomplete with up arrow
-bind '"\e[A":history-search-backward'
-bind '"\e[B":history-search-forward'
+case "$TERM" in
+  xterm*|rxvt*)
+    bind '"\e[A":history-search-backward'
+    bind '"\e[B":history-search-forward'
+    ;;
+esac
 
 # Make cd try only directories
 complete -d cd
